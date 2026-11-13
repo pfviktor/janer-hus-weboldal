@@ -110,7 +110,7 @@ import { siteConfig } from '../config/site';
     const prevBtn = document.getElementById('reviews-prev-btn');
     const nextBtn = document.getElementById('reviews-next-btn');
     const dotsContainer = document.getElementById('reviews-dots');
-    const dots = dotsContainer ? dotsContainer.querySelectorAll('.reviews-dot') : [];
+    const indicator = document.getElementById('reviews-indicator');
     const slides = track ? track.querySelectorAll('.review-slide') : [];
 
     if (!track || !prevBtn || !nextBtn || slides.length === 0) return;
@@ -123,41 +123,115 @@ import { siteConfig } from '../config/site';
       return firstSlide.offsetWidth + gap;
     }
 
-    prevBtn.addEventListener('click', () => {
-      const step = getSlideWidth();
-      track.scrollBy({ left: -step, behavior: 'smooth' });
-    });
-
-    nextBtn.addEventListener('click', () => {
-      const step = getSlideWidth();
-      track.scrollBy({ left: step, behavior: 'smooth' });
-    });
-
-    dots.forEach((dot) => {
-      dot.addEventListener('click', (e) => {
-        const btn = e.currentTarget as HTMLElement;
-        const targetIdx = parseInt(btn.dataset.dotIndex || '0', 10);
-        const step = getSlideWidth();
-        track.scrollTo({ left: targetIdx * step, behavior: 'smooth' });
-      });
-    });
-
-    function updateActiveState() {
-      const step = getSlideWidth();
-      const currentIdx = Math.round(track.scrollLeft / step);
-      dots.forEach((dot, idx) => {
-        if (idx === currentIdx) {
-          dot.classList.add('is-active');
-        } else {
-          dot.classList.remove('is-active');
-        }
-      });
+    function getMaxScroll() {
+      return Math.max(0, track.scrollWidth - track.clientWidth);
     }
 
-    track.addEventListener('scroll', updateActiveState, { passive: true });
+    function getTotalPositions() {
+      const step = getSlideWidth();
+      const maxScroll = getMaxScroll();
+      if (maxScroll <= 5) return 1;
+      return Math.max(1, Math.round(maxScroll / step) + 1);
+    }
+
+    function getCurrentIndex() {
+      const step = getSlideWidth();
+      const maxScroll = getMaxScroll();
+      if (track.scrollLeft >= maxScroll - 10) {
+        return getTotalPositions() - 1;
+      }
+      return Math.min(getTotalPositions() - 1, Math.max(0, Math.round(track.scrollLeft / step)));
+    }
+
+    function renderDots() {
+      if (!dotsContainer) return;
+      const total = getTotalPositions();
+      dotsContainer.innerHTML = '';
+
+      if (total <= 1) {
+        dotsContainer.style.display = 'none';
+        return;
+      } else {
+        dotsContainer.style.display = 'flex';
+      }
+
+      const current = getCurrentIndex();
+      for (let i = 0; i < total; i++) {
+        const dot = document.createElement('button');
+        dot.className = 'reviews-dot' + (i === current ? ' is-active' : '');
+        dot.setAttribute('data-dot-index', i.toString());
+        dot.setAttribute('aria-label', `Ugrás a(z) ${i + 1}. nézetre`);
+        dot.addEventListener('click', () => {
+          const step = getSlideWidth();
+          const maxScroll = getMaxScroll();
+          const target = i === total - 1 ? maxScroll : i * step;
+          track.scrollTo({ left: target, behavior: 'smooth' });
+        });
+        dotsContainer.appendChild(dot);
+      }
+    }
+
+    function updateState() {
+      const total = getTotalPositions();
+      const current = getCurrentIndex();
+
+      if (dotsContainer) {
+        const dots = dotsContainer.querySelectorAll('.reviews-dot');
+        if (dots.length !== total) {
+          renderDots();
+        } else {
+          dots.forEach((dot, idx) => {
+            if (idx === current) {
+              dot.classList.add('is-active');
+            } else {
+              dot.classList.remove('is-active');
+            }
+          });
+        }
+      }
+
+      if (indicator) {
+        indicator.textContent = `Lapozzon a vélemények között (${current + 1} / ${total})`;
+      }
+    }
+
+    // Következő gomb: a végén simán átfordul az elejére (végtelen lapozás), így soha nem akad meg!
+    nextBtn.onclick = () => {
+      const step = getSlideWidth();
+      const maxScroll = getMaxScroll();
+      if (track.scrollLeft >= maxScroll - 10) {
+        track.scrollTo({ left: 0, behavior: 'smooth' });
+      } else {
+        track.scrollBy({ left: step, behavior: 'smooth' });
+      }
+    };
+
+    // Előző gomb: az elején simán átfordul a végére
+    prevBtn.onclick = () => {
+      const step = getSlideWidth();
+      const maxScroll = getMaxScroll();
+      if (track.scrollLeft <= 10) {
+        track.scrollTo({ left: maxScroll, behavior: 'smooth' });
+      } else {
+        track.scrollBy({ left: -step, behavior: 'smooth' });
+      }
+    };
+
+    renderDots();
+    updateState();
+
+    let scrollTimeout: any;
+    track.addEventListener('scroll', () => {
+      clearTimeout(scrollTimeout);
+      scrollTimeout = setTimeout(updateState, 40);
+    }, { passive: true });
+
+    window.addEventListener('resize', () => {
+      renderDots();
+      updateState();
+    });
   }
 
-  // Initial load & view transition support
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', initReviewsSlider);
   } else {
