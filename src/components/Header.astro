@@ -4,16 +4,13 @@ import { siteConfig } from '../config/site';
 
 <header class="nav" role="banner">
   <div class="container nav__inner">
-    <!-- Logo -->
+    <!-- Logo: Egy vonalban, optikailag tökéletesen középre igazítva -->
     <a href="/" class="nav__logo" aria-label={siteConfig.businessName}>
       <img src="/images/logo.png" alt={siteConfig.businessName} class="nav__logo-img" />
-      <div class="nav__logo-text-wrap">
-        <span class="nav__logo-name">{siteConfig.businessName}</span>
-        <span class="nav__logo-tagline">{siteConfig.tagline}</span>
-      </div>
+      <span class="nav__logo-name">{siteConfig.businessName}</span>
     </a>
 
-    <!-- Asztali Navigáció -->
+    <!-- Asztali Navigáció: Azonos magasságban és függőleges tengelyen -->
     <nav class="nav__desktop" aria-label="Fő navigáció">
       <ul class="nav__desktop-links">
         <li><a href="#mintaboltok" class="nav__link">Mintaboltok</a></li>
@@ -46,10 +43,7 @@ import { siteConfig } from '../config/site';
     <button class="mobile-drawer__close" id="drawer-close" aria-label="Menü bezárása">✕</button>
     <a href="/" class="nav__logo" style="margin-bottom:1.5rem; display:flex; align-items:center; gap:0.75rem;">
       <img src="/images/logo.png" alt={siteConfig.businessName} style="height:44px; width:auto;" />
-      <div>
-        <span class="nav__logo-name" style="font-size:1.15rem;">{siteConfig.businessName}</span>
-        <div style="font-size:0.72rem; color:var(--color-text-soft);">{siteConfig.tagline}</div>
-      </div>
+      <span class="nav__logo-name" style="font-size:1.25rem;">{siteConfig.businessName}</span>
     </a>
     <a href="#mintaboltok" class="mobile-drawer__link">Mintaboltjaink & Grillpult</a>
     <a href="#termekek" class="mobile-drawer__link">Termékeink & TRADÍCIÓ</a>
