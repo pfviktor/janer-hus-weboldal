@@ -1,7 +1,8 @@
 export interface ServiceItem {
   title: string;
   description: string;
-  icon: string;
+  image?: string;
+  icon?: string;
   price?: string;
   badge?: string;
 }
@@ -17,7 +18,7 @@ export interface ReviewItem {
 export interface WhyUsItem {
   title: string;
   description: string;
-  icon: string;
+  iconType: 'flag' | 'factory' | 'shield' | 'handshake';
 }
 
 export interface StoreItem {
@@ -28,6 +29,7 @@ export interface StoreItem {
   phone: string;
   phoneClean: string;
   email: string;
+  image: string;
   hours: { days: string; time: string }[];
   highlight: string;
   badge?: string;
@@ -40,7 +42,7 @@ export const siteConfig = {
   legalName: 'Jáner-Hús Feldolgozó és Kereskedelmi Zrt.',
   tagline: 'Frissen a legjobb! · Minőségi húsáru és kézműves füstöltek 1992 óta',
   seoDescription: 'Jáner-Hús Zrt. – Húsfeldolgozás, húsnagykereskedés és 4 saját mintabolt Budapesten és Pest megyében. Hagyományos TRADÍCIÓ termékek, konyhakész húsbontás séfeknek és 4.8★ óbudai mintabolt grillpulttal.',
-  siteUrl: 'https://janerhus.vercel.app',
+  siteUrl: 'https://janer-hus-weboldal.vercel.app',
 
   // Cégadatok (B2B bizalom és transzparencia)
   companyData: {
@@ -53,12 +55,12 @@ export const siteConfig = {
     ownership: '100% Magyar Tulajdon',
   },
 
-  // Márka színek (Prémium húsipari bordó, meleg arany akcentus, kézműves meleg háttér)
+  // Márka színek (Prémium húsipari mélybordó, meleg arany akcentus, természetes háttér)
   theme: {
-    primary: '#8B1E1E',       // Prémium mély marhabordó / húsipari nemes vörös
+    primary: '#8B1E1E',       // Prémium mély marhabordó
     primaryHover: '#701515',  // Sötétebb telt bordó
     accent: '#C2410C',        // Meleg sült arany / fűszer narancs
-    bg: '#FAF8F5',            // Meleg kézműves törtfehér háttér
+    bg: '#FAF8F5',            // Meleg törtfehér háttér
     bgAlt: '#F4EFEA',         // Finom meleg kontrasztos szekció háttér
     text: '#1C1917',          // Mély kőszürke / fekete betűk
     textSoft: '#57534E',      // Finom másodlagos szövegszín
@@ -67,7 +69,7 @@ export const siteConfig = {
 
   // Hero szekció
   hero: {
-    badge: '★ 4.8 Google Értékelés (170+ vélemény) · 100% Magyar Tulajdon · 1992 Óta',
+    badge: '4.8 Google Értékelés (170+ vélemény) · 100% Magyar Tulajdon · 1992 Óta',
     titleStart: 'Friss minőségi húsáru és hagyományos füstöltek',
     titleHighlight: 'egyenesen a hazai termelőktől',
     lead: 'Több mint 30 éve szolgáljuk ki a lakosságot és Magyarország vezető séfjeit, éttermeit és szállodáit. Két európai uniós engedéllyel rendelkező üzem, 4 saját mintabolt és szigorú ISO 9001 minőségirányítás Óbudától Szigetszentmiklósig.',
@@ -75,7 +77,7 @@ export const siteConfig = {
     ctaPrimaryLink: '#mintaboltok',
     ctaSecondary: 'B2B Húsnagykereskedés →',
     ctaSecondaryLink: '#nagykereskedes',
-    image: '/images/hero.jpg',
+    image: '/images/hero-meat.jpg',
   },
 
   // Mintaboltok szekció
@@ -92,6 +94,7 @@ export const siteConfig = {
         phone: '(06 1) 367 5630',
         phoneClean: '+3613675630',
         email: 'rendeles@janerhus.hu',
+        image: '/images/store-obuda.jpg',
         hours: [
           { days: 'Hétfő', time: '07:00 – 14:00' },
           { days: 'Kedd – Péntek', time: '07:00 – 18:00' },
@@ -110,6 +113,7 @@ export const siteConfig = {
         phone: '(06 20) 349 8897',
         phoneClean: '+36203498897',
         email: 'rendeles@janerhus.hu',
+        image: '/images/store-isaszeg.jpg',
         hours: [
           { days: 'Hétfő', time: '07:00 – 14:00' },
           { days: 'Kedd – Péntek', time: '07:00 – 18:00' },
@@ -127,6 +131,7 @@ export const siteConfig = {
         phone: '(06 20) 599 2020',
         phoneClean: '+36205992020',
         email: 'rendeles@janerhus.hu',
+        image: '/images/store-monor.jpg',
         hours: [
           { days: 'Hétfő – Péntek', time: '08:00 – 20:00' },
           { days: 'Szombat', time: '08:00 – 13:00' },
@@ -143,6 +148,7 @@ export const siteConfig = {
         phone: '(06 20) 589 6453',
         phoneClean: '+36205896453',
         email: 'rendeles@janerhus.hu',
+        image: '/images/store-dunakeszi.jpg',
         hours: [
           { days: 'Hétfő – Péntek', time: '08:00 – 19:00' },
           { days: 'Szombat', time: '08:00 – 16:00' },
@@ -163,45 +169,45 @@ export const siteConfig = {
       {
         title: 'Friss Tőkehúsok',
         description: 'Sertés, marha, borjú, bárány, birka és bőrös malac húsok napi friss vágásból, szigorú higiéniai ellenőrzés mellett.',
-        icon: '🥩',
+        image: '/images/product-tokehus.jpg',
         badge: 'Hazai gazdáktól',
       },
       {
         title: 'Friss Baromfi Kínálat',
         description: 'Csirke, kacsa, liba és pulyka teljes bontásban: mellehúsa, combok, szárnyak, bőr és belsőségek a legmagasabb minőségben.',
-        icon: '🍗',
+        image: '/images/product-baromfi.jpg',
       },
       {
         title: 'TRADÍCIÓ Füstölt Áruk & Szalonnák',
         description: 'Hagyományos keményfán füstölt csülkök, tarják, oldalasok és szalonnafélék a megszokott, felejthetetlen magyar ízvilággal.',
-        icon: '🥓',
+        image: '/images/product-fustolt.jpg',
         badge: 'Saját márka',
       },
       {
         title: 'Kézműves Kolbász- és Hurkafélék',
         description: 'Sütni való, főtt és érlelt szárazkolbászok és hurkák generációs receptek szerint, adalékanyag-minimalizálással.',
-        icon: '🌭',
+        image: '/images/product-kolbasz.jpg',
       },
       {
         title: 'Prémium Sonkafélék & Felvágottak',
         description: 'Főtt és füstölt-főtt sonkák, minőségi felvágottak, szalámik és kenyérre valók a mindennapi és ünnepi asztalra.',
-        icon: '🥪',
+        image: '/images/product-sonka.jpg',
       },
       {
         title: 'Májasok, Kenősök & Vörösáruk',
         description: 'Finom házi kenőmájasok, roppanós virslik és szafaládék garantált hústartalommal, gyerekbarát összetételben.',
-        icon: '🧆',
+        image: '/images/product-majas.jpg',
       },
       {
         title: 'Óbudai Retro Grillpult',
         description: 'Helyben sült kolbászok, sült csirke és sertéshúsok, és a legendás ropogós sült pörc elvitelre vagy azonnali fogyasztásra.',
-        icon: '🔥',
+        image: '/images/product-grill.jpg',
         badge: 'Óbudai sláger',
       },
       {
         title: 'Konyhakész Előkészítés',
         description: 'Szeletelt, kockázott, csíkozott, darált vagy pácolt húsok pontos méretben és adagolásban éttermeknek és családoknak.',
-        icon: '🔪',
+        image: '/images/product-elokeszites.jpg',
       },
     ] as ServiceItem[],
   },
@@ -222,32 +228,32 @@ export const siteConfig = {
       {
         title: 'Szombaton is szállítunk',
         description: 'A hétvégi csúcsforgalom sem jelenthet fennakadást a konyháján – szombati kiszállítást is vállalunk.',
-        icon: '🚚',
+        iconType: 'truck',
       },
       {
         title: 'NON-STOP rendelésleadás',
         description: 'Rendeléseit telefonon, emailben (rendeles@janerhus.hu) vagy faxon bármikor leadhatja. Du. 16:00 után érkező tételeket másnap reggel indítjuk.',
-        icon: '⏰',
+        iconType: 'clock',
       },
       {
         title: 'Ingyenes kiszállítás 20.000 Ft-tól',
         description: 'Már 20 ezer forintos rendelési érték felett díjmentesen, hűtőláncban juttatjuk el az árut az Ön konyhájára.',
-        icon: '📦',
+        iconType: 'box',
       },
       {
         title: 'Janer Express Budapest',
         description: 'Sürgős, fix időpontra kért szállítás a főváros területén rugalmas expressz futárszolgálatunkkal.',
-        icon: '⚡',
+        iconType: 'bolt',
       },
       {
         title: 'Két EU-engedélyes saját üzem',
         description: 'HU 387 EK budapesti húsbontó és HU 495 EK szigetszentmiklósi feldolgozó garantálja a folyamatos alapanyag-ellátást.',
-        icon: '🏭',
+        iconType: 'factory',
       },
       {
         title: 'ISO 9001 minőségbiztosítás',
         description: 'Nemzetközileg tanúsított élelmiszerbiztonsági és higiéniai rendszer a vágástól a konyhaajtóig.',
-        icon: '📋',
+        iconType: 'clipboard',
       },
     ],
     prepServices: [
@@ -268,27 +274,27 @@ export const siteConfig = {
       {
         title: '30+ év tapasztalat, 100% magyar tulajdon',
         description: 'Nem multinacionális közvetítőkkel dolgozunk. Hazai gazdák állatállományát dolgozzuk fel saját üzemeinkben.',
-        icon: '🇭🇺',
+        iconType: 'flag',
       },
       {
         title: 'Két EU-engedélyes üzem (HU 387 & HU 495 EK)',
         description: 'Budapesti húsbontónk és szigetszentmiklósi feldolgozónk a legszigorúbb európai higiéniai szabványoknak felel meg.',
-        icon: '🏭',
+        iconType: 'factory',
       },
       {
         title: 'ISO 9001 minőségirányítás',
         description: '2011 óta tanúsított rendszer biztosítja a hibátlan hűtőláncot, a pontos nyomonkövethetőséget és a garantált frissességet.',
-        icon: '🛡️',
+        iconType: 'shield',
       },
       {
         title: 'Személyre szabott rugalmasság',
         description: 'Legyen szó a vasárnap is nyitva tartó mintaboltjainkról vagy az éttermek egyedi húsbontási kéréseiről, nálunk a vevő az első.',
-        icon: '🤝',
+        iconType: 'handshake',
       },
     ] as WhyUsItem[],
   },
 
-  // Valós Google értékelések (Social proof az óbudai Pacsirtamező utcai boltról)
+  // Valós Google értékelések
   reviewsSection: {
     badge: 'Valós vásárlói vélemények',
     title: 'Vásárlóink mondták rólunk a Google Térképen',
@@ -339,7 +345,7 @@ export const siteConfig = {
     formSubmitEmail: 'rendeles@janerhus.hu',
   },
 
-  // Lábléc & Ügynökségi referencia
+  // Lábléc
   agencyCredit: {
     enabled: true,
     name: 'Farkas Web Studio',

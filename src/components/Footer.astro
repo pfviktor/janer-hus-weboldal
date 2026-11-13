@@ -9,15 +9,23 @@ const currentYear = new Date().getFullYear();
     <div class="footer__grid">
       <!-- Céginfó & Hivatalos adatok -->
       <div>
-        <div class="footer__brand-name">🥩 {siteConfig.businessName}</div>
-        <p class="footer__brand-text">{siteConfig.tagline}</p>
+        <div style="display:flex; align-items:center; gap:0.75rem; margin-bottom:1rem;">
+          <img src="/images/logo.png" alt={siteConfig.businessName} style="height:52px; width:auto; background:#FFF; border-radius:50%; padding:3px;" />
+          <div>
+            <div class="footer__brand-name" style="margin:0; font-size:1.25rem;">{siteConfig.businessName}</div>
+            <div style="font-size:0.75rem; color:rgba(255,255,255,0.7);">{siteConfig.tagline}</div>
+          </div>
+        </div>
 
-        <div style="margin-top:1.25rem; font-size:0.85rem; color:rgba(255,255,255,0.75); line-height:1.7;">
+        <div style="font-size:0.85rem; color:rgba(255,255,255,0.75); line-height:1.7;">
           <p style="margin-bottom:0.4rem;"><strong>{siteConfig.legalName}</strong></p>
           <p style="margin:0;">Cégjegyzékszám: {siteConfig.companyData.registrationNumber}</p>
           <p style="margin:0;">Adószám: {siteConfig.companyData.taxNumber}</p>
           <p style="margin:0;">EU Üzemek: {siteConfig.companyData.euPlantBudapest} · {siteConfig.companyData.euPlantSzigetszentmiklos}</p>
           <p style="margin:0;">Minőségirányítás: {siteConfig.companyData.iso}</p>
+          <div style="margin-top:0.75rem;">
+            <img src="/images/iso-9001.jpg" alt="ISO 9001 Tanúsítvány" style="height:42px; width:auto; border-radius:4px;" />
+          </div>
         </div>
       </div>
 

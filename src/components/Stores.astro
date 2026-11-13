@@ -16,48 +16,58 @@ import { siteConfig } from '../config/site';
     <div class="stores-grid">
       {siteConfig.storesSection.stores.map((store) => (
         <div class={`store-card ${store.isFlagship ? 'store-card--flagship' : ''}`}>
-          <div class="store-card__header">
-            <div>
-              <span class="store-card__city">{store.city}</span>
-              <h3 class="store-card__title">{store.name}</h3>
-            </div>
+          <!-- Kártya fotó -->
+          <div class="store-card__img-wrap">
+            <img src={store.image} alt={store.name} class="store-card__img" loading="lazy" />
             {store.badge && (
-              <span class="store-card__badge">{store.badge}</span>
+              <span class="store-card__img-badge">{store.badge}</span>
             )}
           </div>
 
-          <p class="store-card__highlight">{store.highlight}</p>
-
-          <div class="store-card__details">
-            <div class="store-detail-row">
-              <span class="store-detail-icon">📍</span>
-              <span class="store-detail-text"><strong>{store.address}</strong></span>
+          <div class="store-card__body">
+            <div class="store-card__meta">
+              <span class="store-card__city">{store.city}</span>
+              <h3 class="store-card__title">{store.name}</h3>
             </div>
-            <div class="store-detail-row">
-              <span class="store-detail-icon">📞</span>
-              <a href={`tel:${store.phoneClean}`} class="store-detail-link">
-                {store.phone}
+
+            <p class="store-card__highlight">{store.highlight}</p>
+
+            <div class="store-card__details">
+              <div class="store-detail-row">
+                <svg class="store-svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                  <circle cx="12" cy="10" r="3"></circle>
+                </svg>
+                <span class="store-detail-text"><strong>{store.address}</strong></span>
+              </div>
+              <div class="store-detail-row">
+                <svg class="store-svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+                </svg>
+                <a href={`tel:${store.phoneClean}`} class="store-detail-link">
+                  {store.phone}
+                </a>
+              </div>
+            </div>
+
+            <!-- Nyitvatartási táblázat -->
+            <div class="store-card__hours">
+              <div class="store-hours-title">Nyitvatartási rend:</div>
+              <ul class="store-hours-list">
+                {store.hours.map((h) => (
+                  <li class="store-hours-item">
+                    <span class="store-hours-days">{h.days}</span>
+                    <span class="store-hours-time">{h.time}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            <div class="store-card__footer">
+              <a href={`tel:${store.phoneClean}`} class="btn btn--outline" style="width:100%; text-align:center; padding:0.6rem 1rem; font-size:0.88rem; font-weight:700;">
+                Bolt hívása / Érdeklődés
               </a>
             </div>
-          </div>
-
-          <!-- Nyitvatartási táblázat -->
-          <div class="store-card__hours">
-            <div class="store-hours-title">Nyitvatartás:</div>
-            <ul class="store-hours-list">
-              {store.hours.map((h) => (
-                <li class="store-hours-item">
-                  <span class="store-hours-days">{h.days}</span>
-                  <span class="store-hours-time">{h.time}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          <div class="store-card__footer">
-            <a href={`tel:${store.phoneClean}`} class="btn btn--outline" style="width:100%; text-align:center; padding:0.55rem 1rem; font-size:0.9rem;">
-              📞 Érdeklődés / Előrendelés
-            </a>
           </div>
         </div>
       ))}
@@ -66,17 +76,23 @@ import { siteConfig } from '../config/site';
     <!-- SZÉP Kártya & Fizetés szalag -->
     <div class="payment-banner">
       <div class="payment-banner__item">
-        <span class="payment-banner__icon">💳</span>
+        <div class="payment-banner__icon-box">
+          <img src="/images/szepkartya.png" alt="SZÉP Kártya" style="max-height:36px; width:auto; border-radius:4px;" />
+        </div>
         <div>
-          <strong>Bankkártya & SZÉP Kártya elfogadás</strong>
-          <p style="margin:0; font-size:0.85rem; color:inherit; opacity:0.85;">Mind a 4 mintaboltunkban kényelmesen fizethet bankkártyával vagy OTP, MBH, K&H SZÉP-kártyával.</p>
+          <strong style="font-size:1.05rem;">Bankkártya & SZÉP Kártya Elfogadóhely</strong>
+          <p style="margin:0; font-size:0.88rem; color:inherit; opacity:0.9;">Mind a 4 mintaboltunkban kényelmesen fizethet bankkártyával vagy OTP, MBH, K&H SZÉP-kártyával.</p>
         </div>
       </div>
       <div class="payment-banner__item">
-        <span class="payment-banner__icon">🔥</span>
+        <div class="payment-banner__icon-box">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#F59E0B" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"></path>
+          </svg>
+        </div>
         <div>
-          <strong>Óbudai Retro Grillpult</strong>
-          <p style="margin:0; font-size:0.85rem; color:inherit; opacity:0.85;">Pacsirtamező utcai boltunkban minden nap friss sült kolbász, ropogós sült pörc és grillcsirke várja!</p>
+          <strong style="font-size:1.05rem;">Óbudai Retro Grillpult</strong>
+          <p style="margin:0; font-size:0.88rem; color:inherit; opacity:0.9;">Pacsirtamező utcai boltunkban minden nap friss sült kolbász, ropogós sült pörc és grillcsirke várja elvitelre vagy helyben fogyasztva!</p>
         </div>
       </div>
     </div>
@@ -86,47 +102,81 @@ import { siteConfig } from '../config/site';
 <style>
   .stores-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-    gap: 1.5rem;
-    margin-bottom: 2.5rem;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.75rem;
+    margin-bottom: 2.75rem;
   }
 
   .store-card {
     background: var(--color-white);
     border: 1px solid var(--color-border);
     border-radius: var(--radius-md);
-    padding: 1.75rem;
+    overflow: hidden;
     display: flex;
     flex-direction: column;
     box-shadow: var(--shadow-sm);
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
   }
 
   .store-card:hover {
-    transform: translateY(-3px);
+    transform: translateY(-4px);
     box-shadow: var(--shadow-md);
   }
 
   .store-card--flagship {
     border-color: var(--color-primary);
-    background: linear-gradient(180deg, #FFFFFF 0%, #FFFBF8 100%);
-    position: relative;
-    box-shadow: 0 4px 20px rgba(139, 30, 30, 0.08);
+    box-shadow: 0 6px 24px rgba(139, 30, 30, 0.12);
   }
 
-  .store-card__header {
+  .store-card__img-wrap {
+    position: relative;
+    height: 180px;
+    width: 100%;
+    overflow: hidden;
+    background: var(--color-bg-alt);
+  }
+
+  .store-card__img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+  }
+
+  .store-card:hover .store-card__img {
+    transform: scale(1.05);
+  }
+
+  .store-card__img-badge {
+    position: absolute;
+    top: 0.75rem;
+    right: 0.75rem;
+    background: rgba(139, 30, 30, 0.92);
+    color: #FFFFFF;
+    font-size: 0.75rem;
+    font-weight: 700;
+    padding: 0.3rem 0.7rem;
+    border-radius: var(--radius-full);
+    backdrop-filter: blur(4px);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+  }
+
+  .store-card__body {
+    padding: 1.5rem;
     display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    gap: 0.75rem;
-    margin-bottom: 1rem;
+    flex-direction: column;
+    flex-grow: 1;
+  }
+
+  .store-card__meta {
+    margin-bottom: 0.75rem;
   }
 
   .store-card__city {
-    font-size: 0.8rem;
+    font-size: 0.78rem;
     text-transform: uppercase;
     font-weight: 700;
-    letter-spacing: 0.06em;
+    letter-spacing: 0.08em;
     color: var(--color-accent);
     display: block;
     margin-bottom: 0.25rem;
@@ -134,22 +184,12 @@ import { siteConfig } from '../config/site';
 
   .store-card__title {
     font-size: 1.2rem;
-    line-height: 1.3;
+    line-height: 1.35;
     color: var(--color-text);
   }
 
-  .store-card__badge {
-    background: rgba(194, 65, 12, 0.12);
-    color: var(--color-accent);
-    font-size: 0.75rem;
-    font-weight: 700;
-    padding: 0.25rem 0.6rem;
-    border-radius: var(--radius-full);
-    white-space: nowrap;
-  }
-
   .store-card__highlight {
-    font-size: 0.92rem;
+    font-size: 0.9rem;
     line-height: 1.55;
     color: var(--color-text-soft);
     margin-bottom: 1.25rem;
@@ -163,18 +203,22 @@ import { siteConfig } from '../config/site';
     margin-bottom: 1.25rem;
     display: flex;
     flex-direction: column;
-    gap: 0.4rem;
+    gap: 0.5rem;
   }
 
   .store-detail-row {
     display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    font-size: 0.9rem;
+    align-items: flex-start;
+    gap: 0.6rem;
+    font-size: 0.88rem;
   }
 
-  .store-detail-icon {
-    font-size: 1rem;
+  .store-svg-icon {
+    width: 16px;
+    height: 16px;
+    color: var(--color-primary);
+    flex-shrink: 0;
+    margin-top: 2px;
   }
 
   .store-detail-link {
@@ -191,10 +235,12 @@ import { siteConfig } from '../config/site';
   }
 
   .store-hours-title {
-    font-size: 0.85rem;
+    font-size: 0.82rem;
     font-weight: 700;
     color: var(--color-text);
     margin-bottom: 0.5rem;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
   }
 
   .store-hours-list {
@@ -206,7 +252,7 @@ import { siteConfig } from '../config/site';
   .store-hours-item {
     display: flex;
     justify-content: space-between;
-    font-size: 0.85rem;
+    font-size: 0.84rem;
     color: var(--color-text-soft);
   }
 
@@ -221,11 +267,11 @@ import { siteConfig } from '../config/site';
 
   .payment-banner {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 1.25rem;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
     background: var(--color-primary);
     color: #FFFFFF;
-    padding: 1.5rem 2rem;
+    padding: 1.75rem 2rem;
     border-radius: var(--radius-md);
     box-shadow: var(--shadow-md);
   }
@@ -233,11 +279,16 @@ import { siteConfig } from '../config/site';
   .payment-banner__item {
     display: flex;
     align-items: center;
-    gap: 1rem;
+    gap: 1.25rem;
   }
 
-  .payment-banner__icon {
-    font-size: 2.2rem;
+  .payment-banner__icon-box {
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: var(--radius-sm);
+    padding: 0.6rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     flex-shrink: 0;
   }
 </style>

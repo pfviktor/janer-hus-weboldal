@@ -10,7 +10,7 @@ import { siteConfig } from '../config/site';
       )}
       <h2 id="reviews-title">{siteConfig.reviewsSection.title}</h2>
       <p style="font-size:1.15rem; margin-top:0.5rem;">
-        Hivatalos Google Értékelés: <strong style="color:var(--color-primary);">⭐ {siteConfig.reviewsSection.googleScore} / 5.0</strong> ({siteConfig.reviewsSection.googleCount} valós vásárlói vélemény alapján)
+        Hivatalos Google Értékelés: <strong style="color:var(--color-primary);">★ {siteConfig.reviewsSection.googleScore} / 5.0</strong> ({siteConfig.reviewsSection.googleCount} valós vásárlói vélemény alapján)
       </p>
     </div>
 
@@ -29,9 +29,14 @@ import { siteConfig } from '../config/site';
 
     <!-- Google Maps tanúsítvány doboz -->
     <div class="google-trust-banner">
-      <div style="font-size:2.2rem;">📍</div>
+      <div class="google-map-icon-box">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+          <circle cx="12" cy="10" r="3"></circle>
+        </svg>
+      </div>
       <div>
-        <h4 style="margin:0 0 0.25rem 0; font-size:1.05rem;">
+        <h4 style="margin:0 0 0.25rem 0; font-size:1.05rem; color:var(--color-text);">
           Jáner-Hús Zrt. 1. számú Mintabolt (Óbuda)
         </h4>
         <p style="margin:0; font-size:0.9rem; color:var(--color-text-soft);">
@@ -44,9 +49,9 @@ import { siteConfig } from '../config/site';
           target="_blank"
           rel="noopener noreferrer"
           class="btn btn--outline"
-          style="padding:0.5rem 1rem; font-size:0.85rem;"
+          style="padding:0.55rem 1.1rem; font-size:0.85rem; font-weight:700;"
         >
-          Google Maps Megnyitása ↗
+          Google Maps Profil Megnyitása ↗
         </a>
       </div>
     </div>
@@ -55,15 +60,27 @@ import { siteConfig } from '../config/site';
 
 <style>
   .google-trust-banner {
-    margin-top: 2.5rem;
+    margin-top: 2.75rem;
     background: var(--color-white);
     border: 1px solid var(--color-border);
     border-radius: var(--radius-md);
-    padding: 1.25rem 1.75rem;
+    padding: 1.5rem 1.75rem;
     display: flex;
     flex-wrap: wrap;
     align-items: center;
     gap: 1.25rem;
     box-shadow: var(--shadow-sm);
+  }
+
+  .google-map-icon-box {
+    width: 44px;
+    height: 44px;
+    border-radius: var(--radius-sm);
+    background: rgba(139, 30, 30, 0.08);
+    color: var(--color-primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
   }
 </style>

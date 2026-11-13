@@ -24,36 +24,53 @@ import { siteConfig } from '../config/site';
         </a>
       </div>
 
-      <!-- Trust jelvények sora -->
+      <!-- Trust jelvények sora tiszta SVG ikonokkal -->
       <div class="hero__trust-strip">
         <div class="trust-badge">
-          <span class="trust-badge__icon">🏭</span>
+          <svg class="trust-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M2 20h20M7 20v-8a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v8M9 4l3-2 3 2v6H9V4z"></path>
+          </svg>
           <span><strong>2 EU Üzem</strong> (HU 387 & 495 EK)</span>
         </div>
         <div class="trust-badge">
-          <span class="trust-badge__icon">🚚</span>
+          <svg class="trust-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="1" y="3" width="15" height="13"></rect>
+            <polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon>
+            <circle cx="5.5" cy="18.5" r="2.5"></circle>
+            <circle cx="18.5" cy="18.5" r="2.5"></circle>
+          </svg>
           <span><strong>Szombaton is</strong> szállítunk</span>
         </div>
         <div class="trust-badge">
-          <span class="trust-badge__icon">💳</span>
-          <span><strong>SZÉP Kártya</strong> elfogadóhely</span>
+          <svg class="trust-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect>
+            <line x1="1" y1="10" x2="23" y2="10"></line>
+          </svg>
+          <span><strong>SZÉP Kártya</strong> elfogadás</span>
         </div>
         <div class="trust-badge">
-          <span class="trust-badge__icon">⭐</span>
+          <svg class="trust-svg" viewBox="0 0 24 24" fill="#F59E0B" stroke="#F59E0B" stroke-width="1">
+            <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+          </svg>
           <span><strong>4.8★ Google</strong> (170+ vélemény)</span>
         </div>
       </div>
     </div>
 
-    <!-- Jobb oldali látványos arculati kártya -->
+    <!-- Jobb oldali látványos arculati kártya a hivatalos logóval és prémium háttérfotóval -->
     <div class="hero__image-wrap">
-      <div class="hero__image-card hero-meat-card">
+      <div class="hero-card-premium">
+        <div class="hero-card-bg-wrap">
+          <img src={siteConfig.hero.image} alt="Jáner-Hús friss áru" class="hero-card-bg-img" />
+          <div class="hero-card-overlay"></div>
+        </div>
+
         <div class="meat-hero-box">
-          <div class="meat-hero-emblem">🥩</div>
+          <img src="/images/logo.png" alt="Jáner-Hús Zrt. Hivatalos Logó" class="meat-hero-official-logo" />
           <span class="meat-hero-sub">HAGYOMÁNY ÉS MINŐSÉG 1992 ÓTA</span>
-          <h2 class="meat-hero-heading">JÁNER-HÚS ZRT.</h2>
+          <h2 class="meat-hero-heading">{siteConfig.businessName}</h2>
           <p class="meat-hero-text">
-            „Frissen a legjobb!” – Két európai uniós engedéllyel rendelkező üzem, 4 saját mintabolt és több mint 500 elégedett partner országszerte.
+            „Frissen a legjobb!” – Két európai uniós engedéllyel rendelkező üzem, 4 saját mintabolt és több mint 500 partner országszerte.
           </p>
 
           <div class="meat-hero-tags">
@@ -64,8 +81,8 @@ import { siteConfig } from '../config/site';
           </div>
 
           <div class="meat-hero-location-pill">
-            📍 <strong>1. sz. Zászlóshajó Mintabolt & Retro Grillpult:</strong><br />
-            1036 Budapest, Pacsirtamező utca 22. (Óbuda)
+            <div style="font-weight:700; color:#FCD34D; margin-bottom:0.2rem;">1. sz. Óbudai Zászlóshajó Mintabolt & Grillpult:</div>
+            <div>1036 Budapest, Pacsirtamező utca 22.</div>
           </div>
         </div>
       </div>
@@ -91,45 +108,59 @@ import { siteConfig } from '../config/site';
     color: var(--color-text-soft);
   }
 
-  .trust-badge__icon {
-    font-size: 1.1rem;
+  .trust-svg {
+    width: 18px;
+    height: 18px;
+    color: var(--color-primary);
+    flex-shrink: 0;
   }
 
-  .hero-meat-card {
-    background: linear-gradient(145deg, #8B1E1E 0%, #540D0D 100%);
-    color: #FFFFFF;
-    border: 1px solid rgba(255, 255, 255, 0.15);
-    border-radius: var(--radius-lg);
-    padding: 2.25rem 2rem;
-    box-shadow: 0 20px 45px rgba(139, 30, 30, 0.25);
+  .hero-card-premium {
     position: relative;
+    border-radius: var(--radius-lg);
     overflow: hidden;
+    box-shadow: 0 20px 45px rgba(139, 30, 30, 0.22);
+    border: 1px solid rgba(255, 255, 255, 0.2);
   }
 
-  .hero-meat-card::before {
-    content: '';
+  .hero-card-bg-wrap {
     position: absolute;
-    top: -50%;
-    right: -50%;
-    width: 200%;
-    height: 200%;
-    background: radial-gradient(circle, rgba(255,255,255,0.08) 0%, rgba(255,255,255,0) 60%);
-    pointer-events: none;
+    inset: 0;
+    z-index: 0;
+  }
+
+  .hero-card-bg-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .hero-card-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(84, 13, 13, 0.88) 0%, rgba(30, 5, 5, 0.94) 100%);
   }
 
   .meat-hero-box {
+    position: relative;
+    z-index: 1;
     display: flex;
     flex-direction: column;
     align-items: center;
     text-align: center;
-    position: relative;
-    z-index: 1;
+    padding: 2.5rem 2rem;
+    color: #FFFFFF;
   }
 
-  .meat-hero-emblem {
-    font-size: 3.5rem;
-    margin-bottom: 0.5rem;
-    filter: drop-shadow(0 4px 10px rgba(0,0,0,0.3));
+  .meat-hero-official-logo {
+    width: 120px;
+    height: 120px;
+    object-fit: contain;
+    margin-bottom: 1rem;
+    filter: drop-shadow(0 4px 14px rgba(0,0,0,0.4));
+    background: #FFFFFF;
+    border-radius: var(--radius-full);
+    padding: 6px;
   }
 
   .meat-hero-sub {
@@ -146,7 +177,7 @@ import { siteConfig } from '../config/site';
     color: #FFFFFF;
     margin-bottom: 0.75rem;
     font-weight: 800;
-    letter-spacing: 0.02em;
+    letter-spacing: -0.01em;
   }
 
   .meat-hero-text {
@@ -154,7 +185,7 @@ import { siteConfig } from '../config/site';
     line-height: 1.6;
     color: rgba(255, 255, 255, 0.9);
     margin-bottom: 1.5rem;
-    max-width: 38ch;
+    max-width: 36ch;
   }
 
   .meat-hero-tags {
@@ -166,22 +197,24 @@ import { siteConfig } from '../config/site';
   }
 
   .meat-tag {
-    background: rgba(255, 255, 255, 0.12);
-    border: 1px solid rgba(255, 255, 255, 0.2);
+    background: rgba(255, 255, 255, 0.14);
+    border: 1px solid rgba(255, 255, 255, 0.22);
     color: #FFFFFF;
     font-size: 0.75rem;
     font-weight: 600;
-    padding: 0.25rem 0.65rem;
+    padding: 0.3rem 0.7rem;
     border-radius: var(--radius-full);
   }
 
   .meat-hero-location-pill {
-    background: rgba(0, 0, 0, 0.3);
-    border: 1px solid rgba(255, 255, 255, 0.15);
+    background: rgba(0, 0, 0, 0.35);
+    border: 1px solid rgba(255, 255, 255, 0.18);
     border-radius: var(--radius-md);
     padding: 0.85rem 1.25rem;
     font-size: 0.85rem;
     line-height: 1.5;
     color: #FFFFFF;
+    width: 100%;
+    max-width: 340px;
   }
 </style>

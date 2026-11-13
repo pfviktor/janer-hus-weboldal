@@ -13,11 +13,56 @@ import { siteConfig } from '../config/site';
     <div class="why-us-grid">
       {siteConfig.whyUs.items.map((item) => (
         <div class="why-us-card">
-          <div class="why-us-card__icon">{item.icon}</div>
-          <h3 style="margin-bottom:0.75rem; color:var(--color-text);">{item.title}</h3>
-          <p style="font-size:0.95rem; line-height:1.6; color:var(--color-text-soft);">{item.description}</p>
+          <div class="why-us-icon-wrap">
+            {item.iconType === 'flag' && (
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"></path>
+                <line x1="4" y1="22" x2="4" y2="15"></line>
+              </svg>
+            )}
+            {item.iconType === 'factory' && (
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M2 20h20M7 20v-8a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v8M9 4l3-2 3 2v6H9V4z"></path>
+              </svg>
+            )}
+            {item.iconType === 'shield' && (
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                <polyline points="9 12 11 14 15 10"></polyline>
+              </svg>
+            )}
+            {item.iconType === 'handshake' && (
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                <circle cx="9" cy="7" r="4"></circle>
+                <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+              </svg>
+            )}
+          </div>
+          <h3 style="margin-bottom:0.75rem; color:var(--color-text); font-size:1.2rem;">{item.title}</h3>
+          <p style="font-size:0.92rem; line-height:1.6; color:var(--color-text-soft);">{item.description}</p>
         </div>
       ))}
     </div>
   </div>
 </section>
+
+<style>
+  .why-us-icon-wrap {
+    width: 48px;
+    height: 48px;
+    border-radius: var(--radius-sm);
+    background: rgba(139, 30, 30, 0.08);
+    color: var(--color-primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1.25rem;
+  }
+
+  .why-us-icon-wrap svg {
+    width: 24px;
+    height: 24px;
+  }
+</style>

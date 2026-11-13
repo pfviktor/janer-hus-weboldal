@@ -12,11 +12,50 @@ import { siteConfig } from '../config/site';
       <p>{siteConfig.wholesale.subtitle}</p>
     </div>
 
-    <!-- Fő B2B előnyök rács -->
+    <!-- Fő B2B előnyök rács tiszta SVG ikonokkal -->
     <div class="wholesale-grid">
       {siteConfig.wholesale.features.map((feat) => (
         <div class="wholesale-card">
-          <div class="wholesale-card__icon">{feat.icon}</div>
+          <div class="wholesale-card__icon-box">
+            {feat.iconType === 'truck' && (
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="1" y="3" width="15" height="13"></rect>
+                <polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon>
+                <circle cx="5.5" cy="18.5" r="2.5"></circle>
+                <circle cx="18.5" cy="18.5" r="2.5"></circle>
+              </svg>
+            )}
+            {feat.iconType === 'clock' && (
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10"></circle>
+                <polyline points="12 6 12 12 16 14"></polyline>
+              </svg>
+            )}
+            {feat.iconType === 'box' && (
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
+                <polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline>
+                <line x1="12" y1="22.08" x2="12" y2="12"></line>
+              </svg>
+            )}
+            {feat.iconType === 'bolt' && (
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+              </svg>
+            )}
+            {feat.iconType === 'factory' && (
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M2 20h20M7 20v-8a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v8M9 4l3-2 3 2v6H9V4z"></path>
+              </svg>
+            )}
+            {feat.iconType === 'clipboard' && (
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+                <rect x="8" y="2" width="8" height="4" rx="1" ry="1"></rect>
+                <path d="m9 14 2 2 4-4"></path>
+              </svg>
+            )}
+          </div>
           <h3 class="wholesale-card__title">{feat.title}</h3>
           <p class="wholesale-card__desc">{feat.description}</p>
         </div>
@@ -26,19 +65,24 @@ import { siteConfig } from '../config/site';
     <!-- Konyhakész húsbontás séfeknek -->
     <div id="elokeszites" class="prep-box">
       <div class="prep-box__header">
-        <span class="section-badge" style="background:rgba(255,255,255,0.2); color:#FFFFFF;">A séfek szolgálatában</span>
-        <h3 style="color:#FFFFFF; font-size:1.6rem; margin-top:0.5rem; margin-bottom:0.5rem;">
+        <span class="prep-tag-badge">A SÉFEK SZOLGÁLATÁBAN</span>
+        <h3 style="color:#FFFFFF; font-size:1.75rem; margin-top:0.6rem; margin-bottom:0.5rem; font-weight:800;">
           Egyedi Húsbontási & Konyhakész Szolgáltatásaink
         </h3>
-        <p style="color:rgba(255,255,255,0.85); max-width:65ch; margin:0 auto;">
-          Nincs két egyforma étterem, ezért nincs két egyforma rendelés sem. Szakembereink az Ön pontos receptúrája és tálalási mérete szerint készítik elő a húsokat.
+        <p style="color:rgba(255,255,255,0.85); max-width:65ch; margin:0 auto; font-size:0.95rem;">
+          Nincs két egyforma étterem, ezért nincs két egyforma rendelés sem. Szakembereink az Ön konyhájának tálalási mérete és pontos receptúrája szerint készítik elő a húsokat.
         </p>
       </div>
 
       <div class="prep-services-grid">
         {siteConfig.wholesale.prepServices.map((service) => (
           <div class="prep-service-item">
-            <div class="prep-service-name">🔪 {service.name}</div>
+            <div class="prep-service-name">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#FCD34D" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="display:inline-block; vertical-align:middle; margin-right:6px;">
+                <polyline points="20 6 9 17 4 12"></polyline>
+              </svg>
+              {service.name}
+            </div>
             <div class="prep-service-desc">{service.desc}</div>
           </div>
         ))}
@@ -47,10 +91,10 @@ import { siteConfig } from '../config/site';
       <!-- Gyors rendelésleadási infó és CTA -->
       <div class="prep-cta-bar">
         <div class="prep-cta-text">
-          <strong>Rendelésleadás & Árajánlatkérés HORECA partnereknek:</strong>
-          <span>Ügyfélszolgálat: {siteConfig.wholesale.phone} · E-mail: {siteConfig.wholesale.email}</span>
+          <strong style="font-size:1.05rem;">Rendelésleadás & Árajánlatkérés HORECA partnereknek:</strong>
+          <span style="opacity:0.9;">Ügyfélszolgálat: <strong>{siteConfig.wholesale.phone}</strong> · E-mail: <strong>{siteConfig.wholesale.email}</strong></span>
         </div>
-        <a href="#kapcsolat" class="btn btn--primary" style="background:#FFFFFF; color:var(--color-primary); font-weight:700;">
+        <a href="#kapcsolat" class="btn btn--primary" style="background:#FFFFFF; color:var(--color-primary); font-weight:700; white-space:nowrap;">
           B2B Ajánlatkérés →
         </a>
       </div>
@@ -61,7 +105,7 @@ import { siteConfig } from '../config/site';
 <style>
   .wholesale-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: 1.5rem;
     margin-bottom: 3.5rem;
   }
@@ -80,27 +124,39 @@ import { siteConfig } from '../config/site';
     box-shadow: var(--shadow-md);
   }
 
-  .wholesale-card__icon {
-    font-size: 2.2rem;
+  .wholesale-card__icon-box {
+    width: 46px;
+    height: 46px;
+    border-radius: var(--radius-sm);
+    background: rgba(139, 30, 30, 0.08);
+    color: var(--color-primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
     margin-bottom: 1rem;
   }
 
+  .wholesale-card__icon-box svg {
+    width: 24px;
+    height: 24px;
+  }
+
   .wholesale-card__title {
-    font-size: 1.25rem;
-    margin-bottom: 0.6rem;
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
     color: var(--color-text);
   }
 
   .wholesale-card__desc {
-    font-size: 0.95rem;
+    font-size: 0.92rem;
     line-height: 1.6;
     color: var(--color-text-soft);
   }
 
   .prep-box {
-    background: linear-gradient(135deg, #8B1E1E 0%, #5C1212 100%);
+    background: linear-gradient(135deg, #8B1E1E 0%, #540D0D 100%);
     border-radius: var(--radius-lg);
-    padding: 2.5rem 2rem;
+    padding: 2.75rem 2.25rem;
     color: #FFFFFF;
     box-shadow: var(--shadow-lg);
   }
@@ -108,6 +164,17 @@ import { siteConfig } from '../config/site';
   .prep-box__header {
     text-align: center;
     margin-bottom: 2rem;
+  }
+
+  .prep-tag-badge {
+    background: rgba(255, 255, 255, 0.16);
+    color: #FCD34D;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    padding: 0.3rem 0.8rem;
+    border-radius: var(--radius-full);
+    display: inline-block;
   }
 
   .prep-services-grid {
@@ -119,15 +186,15 @@ import { siteConfig } from '../config/site';
 
   .prep-service-item {
     background: rgba(255, 255, 255, 0.1);
-    border: 1px solid rgba(255, 255, 255, 0.15);
+    border: 1px solid rgba(255, 255, 255, 0.16);
     border-radius: var(--radius-md);
-    padding: 1.25rem 1.5rem;
+    padding: 1.25rem 1.4rem;
     backdrop-filter: blur(4px);
   }
 
   .prep-service-name {
     font-weight: 700;
-    font-size: 1.1rem;
+    font-size: 1.05rem;
     margin-bottom: 0.35rem;
     color: #FFFFFF;
   }
@@ -144,10 +211,10 @@ import { siteConfig } from '../config/site';
     align-items: center;
     justify-content: space-between;
     gap: 1.5rem;
-    background: rgba(0, 0, 0, 0.25);
+    background: rgba(0, 0, 0, 0.28);
     border-radius: var(--radius-md);
     padding: 1.25rem 1.75rem;
-    border: 1px solid rgba(255, 255, 255, 0.15);
+    border: 1px solid rgba(255, 255, 255, 0.16);
   }
 
   .prep-cta-text {
