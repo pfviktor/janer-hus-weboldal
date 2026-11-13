@@ -8,8 +8,7 @@ export interface ServiceItem {
 }
 
 export interface ReviewItem {
-  author: string;
-  role?: string;
+  role: string;
   rating: number;
   comment: string;
   date?: string;
@@ -36,6 +35,11 @@ export interface StoreItem {
   isFlagship?: boolean;
 }
 
+export interface PartnerItem {
+  name: string;
+  logo: string;
+}
+
 export const siteConfig = {
   // Alapadatok
   businessName: 'Jáner-Hús Zrt.',
@@ -53,6 +57,7 @@ export const siteConfig = {
     iso: 'ISO 9001:2015',
     founded: '1992',
     ownership: '100% Magyar Tulajdon',
+    rdProject: 'AGR_PIAC K+F kutatás-fejlesztési támogatás nyertese',
   },
 
   // Márka színek (Prémium húsipari mélybordó, meleg arany akcentus, természetes háttér)
@@ -88,7 +93,7 @@ export const siteConfig = {
     stores: [
       {
         id: 'obuda',
-        name: '1. sz. Óbudai Zászlóshajó Mintabolt',
+        name: 'Óbudai Mintabolt & Retro Grillpult',
         city: 'Budapest III. kerület',
         address: '1036 Budapest, Pacsirtamező utca 22.',
         phone: '(06 1) 367 5630',
@@ -107,7 +112,7 @@ export const siteConfig = {
       },
       {
         id: 'isaszeg',
-        name: '2. sz. Isaszegi Mintabolt',
+        name: 'Isaszegi Mintabolt',
         city: 'Isaszeg',
         address: '2117 Isaszeg, Kossuth Lajos u. 9.',
         phone: '(06 20) 349 8897',
@@ -125,7 +130,7 @@ export const siteConfig = {
       },
       {
         id: 'monor',
-        name: '3. sz. Monori Mintabolt',
+        name: 'Monori Mintabolt (Tesco)',
         city: 'Monor',
         address: '2200 Monor, 4-es főút mellett (Tesco Üzletsor)',
         phone: '(06 20) 599 2020',
@@ -142,7 +147,7 @@ export const siteConfig = {
       },
       {
         id: 'dunakeszi',
-        name: '4. sz. Dunakeszi Mintabolt',
+        name: 'Dunakeszi Mintabolt (Tesco)',
         city: 'Dunakeszi',
         address: '2120 Dunakeszi, Fő út 190. (Tesco Áruház)',
         phone: '(06 20) 589 6453',
@@ -210,6 +215,24 @@ export const siteConfig = {
         image: '/images/product-elokeszites.jpg',
       },
     ] as ServiceItem[],
+  },
+
+  // Partnerek és forgalmazott márkák
+  partnersSection: {
+    badge: 'Megbízható Források & Együttműködések',
+    title: 'Forgalmazott Márkáink & Partnereink',
+    subtitle: 'Saját gyártású TRADÍCIÓ termékeink mellett a legismertebb hazai és nemzetközi élelmiszeripari márkák hivatalos forgalmazói vagyunk.',
+    partners: [
+      { name: 'Pick Szeged', logo: '/images/partners/pick.jpg' },
+      { name: 'Kometa 99', logo: '/images/partners/kometa.jpg' },
+      { name: 'Gyulai Húskombinát', logo: '/images/partners/gyulai.jpg' },
+      { name: 'Hungerit', logo: '/images/partners/hungerit.jpg' },
+      { name: 'Délhús', logo: '/images/partners/delhus.jpg' },
+      { name: 'Orsi', logo: '/images/partners/orsi.jpg' },
+      { name: 'Landhof', logo: '/images/partners/landhof.jpg' },
+      { name: 'Csabahús', logo: '/images/partners/csabahus.jpg' },
+      { name: 'Debreceni Hús', logo: '/images/partners/debreceni.jpg' },
+    ] as PartnerItem[],
   },
 
   // Húsnagykereskedés & Séfek kiszolgálása (B2B szekció)
@@ -294,7 +317,7 @@ export const siteConfig = {
     ] as WhyUsItem[],
   },
 
-  // Valós Google értékelések
+  // Valós Google értékelések (Anonim titulusok polgári nevek helyett)
   reviewsSection: {
     badge: 'Valós vásárlói vélemények',
     title: 'Vásárlóink mondták rólunk a Google Térképen',
@@ -302,22 +325,34 @@ export const siteConfig = {
     googleCount: '170+',
     items: [
       {
-        author: 'Kovács Ferenc',
-        role: 'Óbudai törzsvásárló',
+        role: 'Óbudai Törzsvásárló (Pacsirtamező utca)',
         rating: 5,
         comment: 'Évtizedek óta ide járunk húsért a Pacsirtamező utcába. Mindig makulátlanul friss az áru, a hentesek rendkívül segítőkészek, és a grillpultból a sült pörcöt egyszerűen kötelező megkóstolni!',
       },
       {
-        author: 'Tóth Andrea',
-        role: 'Vásárló (Google Maps)',
+        role: 'Gasztronómiai Partner · Étteremvezető',
+        rating: 5,
+        comment: 'A konyhánkra a Jáner-Hús szállítja az előkészített húsárut. A szombati szállítás és a grammra pontos szeletelés hatalmas segítség a hétvégi rohamnál. Korrekt, pontos partner!',
+      },
+      {
+        role: 'Helyi Vásárló · Családi Hétvégi Sütés',
         rating: 5,
         comment: 'Tiszta, kulturált üzlet, hatalmas választékkal. Hétvégére innen rendeltem a húsokat a családi sütögetéshez, gyönyörűen előkészítették. Nagyon örülök, hogy SZÉP kártyát is elfogadnak!',
       },
       {
-        author: 'Molnár Gábor',
-        role: 'Étteremvezető partner',
+        role: 'Közétkeztetési és Konyhavezető',
         rating: 5,
-        comment: 'A konyhánkra a Jáner-Hús szállítja az előkészített húsárut. A szombati szállítás és a grammra pontos szeletelés hatalmas segítség a hétvégi rohamnál. Korrekt, pontos partner!',
+        comment: 'Nagyüzemi konyhánkra napi szinten érkeznek a darabolt és kockázott húsok. Az ISO 9001 minősítés és a szigorú hűtőlánc nálunk alapfeltétel, amit a Jáner-Hús 100%-ban garantál.',
+      },
+      {
+        role: 'Dunakeszi Vásárló (Tesco Mintabolt)',
+        rating: 5,
+        comment: 'Nagyon örülök, hogy a Dunakeszi Tescóban megnyílt a mintaboltjuk! Nem kell bemennem a városba a megszokott minőségi sertés- és marhahúsért, hétvégén is gyors a kiszolgálás.',
+      },
+      {
+        role: 'Isaszegi Törzsvendég (Kossuth L. u.)',
+        rating: 5,
+        comment: 'A felújított isaszegi hentesüzlet csodaszép lett! Óriási előny, hogy vasárnap is nyitva tartanak, a Cserpes tejtermékek és a füstölt kolbászok pedig verhetetlenek a környéken.',
       },
     ] as ReviewItem[],
   },

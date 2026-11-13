@@ -25,8 +25,11 @@ import { siteConfig } from '../config/site';
             <h3 class="service-card__title">{item.title}</h3>
             <p class="service-card__desc">{item.description}</p>
             <div class="service-card__footer">
-              <span class="service-card__price">{item.price || 'Friss napi vágásból'}</span>
-              <a href="#kapcsolat" class="btn btn--outline" style="padding:0.45rem 0.95rem; font-size:0.85rem; font-weight:700;">
+              <div class="service-card__price-wrap">
+                <span class="service-card__price-label">Ellátás:</span>
+                <span class="service-card__price-val">{item.price || 'Friss vágásból'}</span>
+              </div>
+              <a href="#kapcsolat" class="btn btn--outline service-card__btn">
                 Érdeklődés →
               </a>
             </div>
@@ -97,7 +100,7 @@ import { siteConfig } from '../config/site';
 
   .service-card__img-wrap {
     position: relative;
-    height: 175px;
+    height: 180px;
     width: 100%;
     overflow: hidden;
     background: var(--color-bg);
@@ -154,14 +157,57 @@ import { siteConfig } from '../config/site';
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding-top: 1rem;
+    gap: 1rem;
+    padding-top: 1.25rem;
     border-top: 1px solid var(--color-border);
+    margin-top: auto;
   }
 
-  .service-card__price {
-    font-size: 0.85rem;
+  .service-card__price-wrap {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+  }
+
+  .service-card__price-label {
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    color: var(--color-text-soft);
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    line-height: 1;
+    margin-bottom: 3px;
+  }
+
+  .service-card__price-val {
+    font-size: 0.88rem;
     font-weight: 700;
     color: var(--color-primary);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .service-card__btn {
+    padding: 0.5rem 1rem;
+    font-size: 0.84rem;
+    font-weight: 700;
+    flex-shrink: 0;
+    white-space: nowrap;
+  }
+
+  @media (max-width: 380px) {
+    .service-card__footer {
+      flex-direction: column;
+      align-items: stretch;
+      gap: 0.75rem;
+    }
+
+    .service-card__btn {
+      width: 100%;
+      text-align: center;
+      justify-content: center;
+    }
   }
 
   .docs-download-box {

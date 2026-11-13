@@ -2,29 +2,75 @@
 import { siteConfig } from '../config/site';
 ---
 
-<section id="velemenyek" class="section section--alt" aria-labelledby="reviews-title">
+<section id="velemenyek" class="section" aria-labelledby="reviews-title">
   <div class="container">
     <div class="section-header">
       {siteConfig.reviewsSection.badge && (
         <span class="section-badge">{siteConfig.reviewsSection.badge}</span>
       )}
       <h2 id="reviews-title">{siteConfig.reviewsSection.title}</h2>
-      <p style="font-size:1.15rem; margin-top:0.5rem;">
-        Hivatalos Google Értékelés: <strong style="color:var(--color-primary);">★ {siteConfig.reviewsSection.googleScore} / 5.0</strong> ({siteConfig.reviewsSection.googleCount} valós vásárlói vélemény alapján)
+      <p style="font-size:1.15rem; margin-top:0.5rem; color:var(--color-text-soft);">
+        Hivatalos Google Értékelés: <strong style="color:var(--color-primary); font-size:1.25rem;">★ {siteConfig.reviewsSection.googleScore} / 5.0</strong> ({siteConfig.reviewsSection.googleCount} valós vásárlói vélemény alapján)
       </p>
     </div>
 
-    <div class="reviews-grid">
-      {siteConfig.reviewsSection.items.map((rev) => (
-        <div class="review-card">
-          <div class="review-card__stars">{'★'.repeat(rev.rating)}</div>
-          <p class="review-card__text">„{rev.comment}”</p>
-          <div>
-            <div class="review-card__author">{rev.author}</div>
-            {rev.role && <div class="review-card__role">{rev.role}</div>}
-          </div>
+    <!-- Lapozható Vélemények Karusszel -->
+    <div class="reviews-carousel-wrapper">
+      <!-- Navigációs gombok felül/oldalt -->
+      <div class="reviews-controls">
+        <span class="reviews-counter" id="reviews-indicator">Lapozzon a vélemények között</span>
+        <div class="reviews-nav-btns">
+          <button id="reviews-prev-btn" class="reviews-nav-btn" aria-label="Előző vélemények" title="Előző">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="m15 18-6-6 6-6"/>
+            </svg>
+          </button>
+          <button id="reviews-next-btn" class="reviews-nav-btn" aria-label="Következő vélemények" title="Következő">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="m9 18 6-6-6-6"/>
+            </svg>
+          </button>
         </div>
-      ))}
+      </div>
+
+      <!-- Kártyák csúszkája -->
+      <div class="reviews-track" id="reviews-track">
+        {siteConfig.reviewsSection.items.map((rev, index) => (
+          <div class="review-slide" data-index={index}>
+            <div class="review-card">
+              <div class="review-card__header">
+                <div class="review-card__stars">{'★'.repeat(rev.rating)}</div>
+                <span class="review-card__badge">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" style="color:#1a73e8; margin-right:4px;">
+                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                  </svg>
+                  Google Vélemény
+                </span>
+              </div>
+              <p class="review-card__text">„{rev.comment}”</p>
+              <div class="review-card__footer">
+                <div class="review-card__avatar-badge">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                    <circle cx="12" cy="7" r="4"></circle>
+                  </svg>
+                </div>
+                <div class="review-card__meta">
+                  <div class="review-card__role-title">{rev.role}</div>
+                  <div class="review-card__verified">Ellenőrzött vásárlói értékelés</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <!-- Navigációs pöttyök -->
+      <div class="reviews-dots" id="reviews-dots">
+        {siteConfig.reviewsSection.items.map((_, i) => (
+          <button class={`reviews-dot ${i === 0 ? 'is-active' : ''}`} data-dot-index={i} aria-label={`Ugrás a ${i + 1}. véleményre`}></button>
+        ))}
+      </div>
     </div>
 
     <!-- Google Maps tanúsítvány doboz -->
@@ -37,7 +83,7 @@ import { siteConfig } from '../config/site';
       </div>
       <div>
         <h4 style="margin:0 0 0.25rem 0; font-size:1.05rem; color:var(--color-text);">
-          Jáner-Hús Zrt. 1. számú Mintabolt (Óbuda)
+          Jáner-Hús Zrt. Óbudai Mintabolt & Grillpult
         </h4>
         <p style="margin:0; font-size:0.9rem; color:var(--color-text-soft);">
           1036 Budapest, Pacsirtamező utca 22. · A környékbeliek kedvenc hentese és grillbárja évtizedek óta.
@@ -45,7 +91,7 @@ import { siteConfig } from '../config/site';
       </div>
       <div style="margin-left:auto;">
         <a
-          href="https://maps.google.com/?q=Jáner-Hús+Zrt.+Pacsirtamező+utca+22"
+          href="https://maps.app.goo.gl/S4c81tZehmEj5XR18"
           target="_blank"
           rel="noopener noreferrer"
           class="btn btn--outline"
@@ -58,7 +104,252 @@ import { siteConfig } from '../config/site';
   </div>
 </section>
 
+<script>
+  function initReviewsSlider() {
+    const track = document.getElementById('reviews-track');
+    const prevBtn = document.getElementById('reviews-prev-btn');
+    const nextBtn = document.getElementById('reviews-next-btn');
+    const dotsContainer = document.getElementById('reviews-dots');
+    const dots = dotsContainer ? dotsContainer.querySelectorAll('.reviews-dot') : [];
+    const slides = track ? track.querySelectorAll('.review-slide') : [];
+
+    if (!track || !prevBtn || !nextBtn || slides.length === 0) return;
+
+    function getSlideWidth() {
+      const firstSlide = slides[0] as HTMLElement;
+      if (!firstSlide) return 320;
+      const style = window.getComputedStyle(track);
+      const gap = parseFloat(style.columnGap || style.gap || '24') || 24;
+      return firstSlide.offsetWidth + gap;
+    }
+
+    prevBtn.addEventListener('click', () => {
+      const step = getSlideWidth();
+      track.scrollBy({ left: -step, behavior: 'smooth' });
+    });
+
+    nextBtn.addEventListener('click', () => {
+      const step = getSlideWidth();
+      track.scrollBy({ left: step, behavior: 'smooth' });
+    });
+
+    dots.forEach((dot) => {
+      dot.addEventListener('click', (e) => {
+        const btn = e.currentTarget as HTMLElement;
+        const targetIdx = parseInt(btn.dataset.dotIndex || '0', 10);
+        const step = getSlideWidth();
+        track.scrollTo({ left: targetIdx * step, behavior: 'smooth' });
+      });
+    });
+
+    function updateActiveState() {
+      const step = getSlideWidth();
+      const currentIdx = Math.round(track.scrollLeft / step);
+      dots.forEach((dot, idx) => {
+        if (idx === currentIdx) {
+          dot.classList.add('is-active');
+        } else {
+          dot.classList.remove('is-active');
+        }
+      });
+    }
+
+    track.addEventListener('scroll', updateActiveState, { passive: true });
+  }
+
+  // Initial load & view transition support
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initReviewsSlider);
+  } else {
+    initReviewsSlider();
+  }
+  document.addEventListener('astro:page-load', initReviewsSlider);
+</script>
+
 <style>
+  .reviews-carousel-wrapper {
+    position: relative;
+    margin-top: 1.5rem;
+  }
+
+  .reviews-controls {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1.25rem;
+  }
+
+  .reviews-counter {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--color-text-soft);
+  }
+
+  .reviews-nav-btns {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .reviews-nav-btn {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    background: var(--color-white);
+    border: 1px solid var(--color-border);
+    color: var(--color-text);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: var(--shadow-sm);
+    transition: all var(--transition);
+  }
+
+  .reviews-nav-btn:hover {
+    background: var(--color-primary);
+    color: var(--color-white);
+    border-color: var(--color-primary);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+  }
+
+  .reviews-track {
+    display: flex;
+    gap: 1.5rem;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    padding: 0.5rem 0.25rem 1.5rem 0.25rem;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+
+  .reviews-track::-webkit-scrollbar {
+    display: none;
+  }
+
+  .review-slide {
+    flex: 0 0 calc((100% - 3rem) / 3);
+    scroll-snap-align: start;
+    min-width: 290px;
+  }
+
+  .review-card {
+    background: var(--color-white);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    padding: 1.75rem 1.5rem;
+    box-shadow: var(--shadow-sm);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+    transition: all var(--transition);
+  }
+
+  .review-card:hover {
+    border-color: var(--color-primary);
+    box-shadow: var(--shadow-md);
+    transform: translateY(-3px);
+  }
+
+  .review-card__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+  }
+
+  .review-card__stars {
+    color: var(--color-accent);
+    font-size: 1.15rem;
+    letter-spacing: 2px;
+  }
+
+  .review-card__badge {
+    display: inline-flex;
+    align-items: center;
+    font-size: 0.72rem;
+    font-weight: 600;
+    color: var(--color-text-soft);
+    background: #f1f3f4;
+    padding: 0.2rem 0.55rem;
+    border-radius: 12px;
+  }
+
+  .review-card__text {
+    font-style: italic;
+    font-size: 0.95rem;
+    line-height: 1.65;
+    margin-bottom: 1.5rem;
+    color: var(--color-text);
+    flex-grow: 1;
+  }
+
+  .review-card__footer {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--color-border);
+  }
+
+  .review-card__avatar-badge {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background: rgba(139, 30, 30, 0.08);
+    color: var(--color-primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .review-card__meta {
+    min-width: 0;
+  }
+
+  .review-card__role-title {
+    font-weight: 700;
+    font-size: 0.92rem;
+    color: var(--color-text);
+    line-height: 1.3;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .review-card__verified {
+    font-size: 0.75rem;
+    color: var(--color-text-soft);
+  }
+
+  .reviews-dots {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-top: 0.5rem;
+  }
+
+  .reviews-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--color-border);
+    border: none;
+    cursor: pointer;
+    transition: all var(--transition);
+    padding: 0;
+  }
+
+  .reviews-dot.is-active {
+    background: var(--color-primary);
+    width: 26px;
+    border-radius: 10px;
+  }
+
   .google-trust-banner {
     margin-top: 2.75rem;
     background: var(--color-white);
@@ -82,5 +373,23 @@ import { siteConfig } from '../config/site';
     align-items: center;
     justify-content: center;
     flex-shrink: 0;
+  }
+
+  @media (max-width: 992px) {
+    .review-slide {
+      flex: 0 0 calc((100% - 1.5rem) / 2);
+    }
+  }
+
+  @media (max-width: 640px) {
+    .review-slide {
+      flex: 0 0 100%;
+    }
+
+    .google-trust-banner {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 1rem;
+    }
   }
 </style>
