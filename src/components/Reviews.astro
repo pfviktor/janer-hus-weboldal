@@ -170,6 +170,9 @@ import { siteConfig } from '../config/site';
   .reviews-carousel-wrapper {
     position: relative;
     margin-top: 1.5rem;
+    overflow: hidden;
+    width: 100%;
+    max-width: 100%;
   }
 
   .reviews-controls {
@@ -216,13 +219,16 @@ import { siteConfig } from '../config/site';
 
   .reviews-track {
     display: flex;
-    gap: 1.5rem;
+    gap: 1.25rem;
     overflow-x: auto;
     scroll-snap-type: x mandatory;
     scroll-behavior: smooth;
     padding: 0.5rem 0.25rem 1.5rem 0.25rem;
     scrollbar-width: none;
     -ms-overflow-style: none;
+    -webkit-overflow-scrolling: touch;
+    width: 100%;
+    max-width: 100%;
   }
 
   .reviews-track::-webkit-scrollbar {
@@ -230,9 +236,10 @@ import { siteConfig } from '../config/site';
   }
 
   .review-slide {
-    flex: 0 0 calc((100% - 3rem) / 3);
+    flex: 0 0 calc((100% - 2.5rem) / 3);
     scroll-snap-align: start;
-    min-width: 290px;
+    min-width: 280px;
+    box-sizing: border-box;
   }
 
   .review-card {
@@ -382,6 +389,9 @@ import { siteConfig } from '../config/site';
   @media (max-width: 640px) {
     .review-slide {
       flex: 0 0 100%;
+      min-width: 100%;
+      max-width: 100%;
+      box-sizing: border-box;
     }
 
     .google-trust-banner {
