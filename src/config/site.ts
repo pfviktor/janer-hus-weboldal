@@ -325,32 +325,32 @@ export const siteConfig = {
     googleCount: '170+',
     items: [
       {
-        role: 'Óbudai Törzsvásárló (Pacsirtamező utca)',
+        role: 'Óbudai Törzsvásárló',
         rating: 5,
         comment: 'Évtizedek óta ide járunk húsért a Pacsirtamező utcába. Mindig makulátlanul friss az áru, a hentesek rendkívül segítőkészek, és a grillpultból a sült pörcöt egyszerűen kötelező megkóstolni!',
       },
       {
-        role: 'Gasztronómiai Partner · Étteremvezető',
+        role: 'Étteremvezető Partner',
         rating: 5,
         comment: 'A konyhánkra a Jáner-Hús szállítja az előkészített húsárut. A szombati szállítás és a grammra pontos szeletelés hatalmas segítség a hétvégi rohamnál. Korrekt, pontos partner!',
       },
       {
-        role: 'Helyi Vásárló · Családi Hétvégi Sütés',
+        role: 'Helyi Családi Vásárló',
         rating: 5,
         comment: 'Tiszta, kulturált üzlet, hatalmas választékkal. Hétvégére innen rendeltem a húsokat a családi sütögetéshez, gyönyörűen előkészítették. Nagyon örülök, hogy SZÉP kártyát is elfogadnak!',
       },
       {
-        role: 'Közétkeztetési és Konyhavezető',
+        role: 'Közétkeztetési Konyhavezető',
         rating: 5,
         comment: 'Nagyüzemi konyhánkra napi szinten érkeznek a darabolt és kockázott húsok. Az ISO 9001 minősítés és a szigorú hűtőlánc nálunk alapfeltétel, amit a Jáner-Hús 100%-ban garantál.',
       },
       {
-        role: 'Dunakeszi Vásárló (Tesco Mintabolt)',
+        role: 'Dunakeszi Vásárló',
         rating: 5,
         comment: 'Nagyon örülök, hogy a Dunakeszi Tescóban megnyílt a mintaboltjuk! Nem kell bemennem a városba a megszokott minőségi sertés- és marhahúsért, hétvégén is gyors a kiszolgálás.',
       },
       {
-        role: 'Isaszegi Törzsvendég (Kossuth L. u.)',
+        role: 'Isaszegi Törzsvendég',
         rating: 5,
         comment: 'A felújított isaszegi hentesüzlet csodaszép lett! Óriási előny, hogy vasárnap is nyitva tartanak, a Cserpes tejtermékek és a füstölt kolbászok pedig verhetetlenek a környéken.',
       },
