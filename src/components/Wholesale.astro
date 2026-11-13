@@ -1,0 +1,159 @@
+---
+import { siteConfig } from '../config/site';
+---
+
+<section id="nagykereskedes" class="section section--alt" aria-labelledby="wholesale-title">
+  <div class="container">
+    <div class="section-header">
+      {siteConfig.wholesale.badge && (
+        <span class="section-badge">{siteConfig.wholesale.badge}</span>
+      )}
+      <h2 id="wholesale-title">{siteConfig.wholesale.title}</h2>
+      <p>{siteConfig.wholesale.subtitle}</p>
+    </div>
+
+    <!-- Fő B2B előnyök rács -->
+    <div class="wholesale-grid">
+      {siteConfig.wholesale.features.map((feat) => (
+        <div class="wholesale-card">
+          <div class="wholesale-card__icon">{feat.icon}</div>
+          <h3 class="wholesale-card__title">{feat.title}</h3>
+          <p class="wholesale-card__desc">{feat.description}</p>
+        </div>
+      ))}
+    </div>
+
+    <!-- Konyhakész húsbontás séfeknek -->
+    <div id="elokeszites" class="prep-box">
+      <div class="prep-box__header">
+        <span class="section-badge" style="background:rgba(255,255,255,0.2); color:#FFFFFF;">A séfek szolgálatában</span>
+        <h3 style="color:#FFFFFF; font-size:1.6rem; margin-top:0.5rem; margin-bottom:0.5rem;">
+          Egyedi Húsbontási & Konyhakész Szolgáltatásaink
+        </h3>
+        <p style="color:rgba(255,255,255,0.85); max-width:65ch; margin:0 auto;">
+          Nincs két egyforma étterem, ezért nincs két egyforma rendelés sem. Szakembereink az Ön pontos receptúrája és tálalási mérete szerint készítik elő a húsokat.
+        </p>
+      </div>
+
+      <div class="prep-services-grid">
+        {siteConfig.wholesale.prepServices.map((service) => (
+          <div class="prep-service-item">
+            <div class="prep-service-name">🔪 {service.name}</div>
+            <div class="prep-service-desc">{service.desc}</div>
+          </div>
+        ))}
+      </div>
+
+      <!-- Gyors rendelésleadási infó és CTA -->
+      <div class="prep-cta-bar">
+        <div class="prep-cta-text">
+          <strong>Rendelésleadás & Árajánlatkérés HORECA partnereknek:</strong>
+          <span>Ügyfélszolgálat: {siteConfig.wholesale.phone} · E-mail: {siteConfig.wholesale.email}</span>
+        </div>
+        <a href="#kapcsolat" class="btn btn--primary" style="background:#FFFFFF; color:var(--color-primary); font-weight:700;">
+          B2B Ajánlatkérés →
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .wholesale-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 3.5rem;
+  }
+
+  .wholesale-card {
+    background: var(--color-white);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    padding: 1.75rem;
+    box-shadow: var(--shadow-sm);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .wholesale-card:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-md);
+  }
+
+  .wholesale-card__icon {
+    font-size: 2.2rem;
+    margin-bottom: 1rem;
+  }
+
+  .wholesale-card__title {
+    font-size: 1.25rem;
+    margin-bottom: 0.6rem;
+    color: var(--color-text);
+  }
+
+  .wholesale-card__desc {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: var(--color-text-soft);
+  }
+
+  .prep-box {
+    background: linear-gradient(135deg, #8B1E1E 0%, #5C1212 100%);
+    border-radius: var(--radius-lg);
+    padding: 2.5rem 2rem;
+    color: #FFFFFF;
+    box-shadow: var(--shadow-lg);
+  }
+
+  .prep-box__header {
+    text-align: center;
+    margin-bottom: 2rem;
+  }
+
+  .prep-services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1.25rem;
+    margin-bottom: 2.5rem;
+  }
+
+  .prep-service-item {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: var(--radius-md);
+    padding: 1.25rem 1.5rem;
+    backdrop-filter: blur(4px);
+  }
+
+  .prep-service-name {
+    font-weight: 700;
+    font-size: 1.1rem;
+    margin-bottom: 0.35rem;
+    color: #FFFFFF;
+  }
+
+  .prep-service-desc {
+    font-size: 0.88rem;
+    line-height: 1.5;
+    color: rgba(255, 255, 255, 0.85);
+  }
+
+  .prep-cta-bar {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.5rem;
+    background: rgba(0, 0, 0, 0.25);
+    border-radius: var(--radius-md);
+    padding: 1.25rem 1.75rem;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+  }
+
+  .prep-cta-text {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    font-size: 0.95rem;
+  }
+</style>

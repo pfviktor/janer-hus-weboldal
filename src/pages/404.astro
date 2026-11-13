@@ -1,0 +1,29 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { siteConfig } from '../config/site';
+---
+
+<BaseLayout
+  title={`404 – Az oldal nem található – ${siteConfig.businessName}`}
+  description="A keresett oldal nem található vagy áthelyezésre került."
+>
+  <Header slot="header" />
+
+  <section class="section" style="min-height:60vh; display:flex; align-items:center; text-align:center;">
+    <div class="container" style="max-width:560px;">
+      <div style="font-size:3.5rem; margin-bottom:1rem;">🔍</div>
+      <h1 style="font-size:2.2rem; margin-bottom:1rem;">404 – Az oldal nem található</h1>
+      <p style="font-size:1.05rem; line-height:1.7; margin-bottom:2rem;">
+        A keresett oldal nem létezik vagy elköltözött. Kérjük, térjen vissza a főoldalra!
+      </p>
+      <a href="/" class="btn btn--primary">
+        Vissza a főoldalra →
+      </a>
+    </div>
+  </section>
+
+  <Footer slot="footer" />
+</BaseLayout>
+

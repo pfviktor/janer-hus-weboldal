@@ -1,0 +1,187 @@
+---
+import { siteConfig } from '../config/site';
+---
+
+<section class="hero" aria-label="Bemutatkozás">
+  <div class="container hero__grid">
+    <div class="hero__content">
+      {siteConfig.hero.badge && (
+        <span class="hero__badge">{siteConfig.hero.badge}</span>
+      )}
+      <h1 class="hero__title">
+        {siteConfig.hero.titleStart} <span>{siteConfig.hero.titleHighlight}</span>
+      </h1>
+      <p class="hero__lead">
+        {siteConfig.hero.lead}
+      </p>
+
+      <div class="hero__cta-group">
+        <a href={siteConfig.hero.ctaPrimaryLink} class="btn btn--primary">
+          {siteConfig.hero.ctaPrimary}
+        </a>
+        <a href={siteConfig.hero.ctaSecondaryLink} class="btn btn--outline">
+          {siteConfig.hero.ctaSecondary}
+        </a>
+      </div>
+
+      <!-- Trust jelvények sora -->
+      <div class="hero__trust-strip">
+        <div class="trust-badge">
+          <span class="trust-badge__icon">🏭</span>
+          <span><strong>2 EU Üzem</strong> (HU 387 & 495 EK)</span>
+        </div>
+        <div class="trust-badge">
+          <span class="trust-badge__icon">🚚</span>
+          <span><strong>Szombaton is</strong> szállítunk</span>
+        </div>
+        <div class="trust-badge">
+          <span class="trust-badge__icon">💳</span>
+          <span><strong>SZÉP Kártya</strong> elfogadóhely</span>
+        </div>
+        <div class="trust-badge">
+          <span class="trust-badge__icon">⭐</span>
+          <span><strong>4.8★ Google</strong> (170+ vélemény)</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Jobb oldali látványos arculati kártya -->
+    <div class="hero__image-wrap">
+      <div class="hero__image-card hero-meat-card">
+        <div class="meat-hero-box">
+          <div class="meat-hero-emblem">🥩</div>
+          <span class="meat-hero-sub">HAGYOMÁNY ÉS MINŐSÉG 1992 ÓTA</span>
+          <h2 class="meat-hero-heading">JÁNER-HÚS ZRT.</h2>
+          <p class="meat-hero-text">
+            „Frissen a legjobb!” – Két európai uniós engedéllyel rendelkező üzem, 4 saját mintabolt és több mint 500 elégedett partner országszerte.
+          </p>
+
+          <div class="meat-hero-tags">
+            <span class="meat-tag">HU 387 EK Budapest</span>
+            <span class="meat-tag">HU 495 EK Szigetszentmiklós</span>
+            <span class="meat-tag">ISO 9001:2015</span>
+            <span class="meat-tag">TRADÍCIÓ & GASTRO</span>
+          </div>
+
+          <div class="meat-hero-location-pill">
+            📍 <strong>1. sz. Zászlóshajó Mintabolt & Retro Grillpult:</strong><br />
+            1036 Budapest, Pacsirtamező utca 22. (Óbuda)
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .hero__trust-strip {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem 1.5rem;
+    margin-top: 2rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--color-border);
+  }
+
+  .trust-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.88rem;
+    color: var(--color-text-soft);
+  }
+
+  .trust-badge__icon {
+    font-size: 1.1rem;
+  }
+
+  .hero-meat-card {
+    background: linear-gradient(145deg, #8B1E1E 0%, #540D0D 100%);
+    color: #FFFFFF;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: var(--radius-lg);
+    padding: 2.25rem 2rem;
+    box-shadow: 0 20px 45px rgba(139, 30, 30, 0.25);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-meat-card::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255,255,255,0.08) 0%, rgba(255,255,255,0) 60%);
+    pointer-events: none;
+  }
+
+  .meat-hero-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    position: relative;
+    z-index: 1;
+  }
+
+  .meat-hero-emblem {
+    font-size: 3.5rem;
+    margin-bottom: 0.5rem;
+    filter: drop-shadow(0 4px 10px rgba(0,0,0,0.3));
+  }
+
+  .meat-hero-sub {
+    font-size: 0.78rem;
+    letter-spacing: 0.15em;
+    font-weight: 700;
+    color: #FCD34D;
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
+  }
+
+  .meat-hero-heading {
+    font-size: 2rem;
+    color: #FFFFFF;
+    margin-bottom: 0.75rem;
+    font-weight: 800;
+    letter-spacing: 0.02em;
+  }
+
+  .meat-hero-text {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.9);
+    margin-bottom: 1.5rem;
+    max-width: 38ch;
+  }
+
+  .meat-hero-tags {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.4rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .meat-tag {
+    background: rgba(255, 255, 255, 0.12);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: #FFFFFF;
+    font-size: 0.75rem;
+    font-weight: 600;
+    padding: 0.25rem 0.65rem;
+    border-radius: var(--radius-full);
+  }
+
+  .meat-hero-location-pill {
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: var(--radius-md);
+    padding: 0.85rem 1.25rem;
+    font-size: 0.85rem;
+    line-height: 1.5;
+    color: #FFFFFF;
+  }
+</style>

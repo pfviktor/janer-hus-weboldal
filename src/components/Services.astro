@@ -1,0 +1,83 @@
+---
+import { siteConfig } from '../config/site';
+---
+
+<section id="termekek" class="section section--alt" aria-labelledby="services-title">
+  <div class="container">
+    <div class="section-header">
+      {siteConfig.servicesSection.badge && (
+        <span class="section-badge">{siteConfig.servicesSection.badge}</span>
+      )}
+      <h2 id="services-title">{siteConfig.servicesSection.title}</h2>
+      <p>{siteConfig.servicesSection.subtitle}</p>
+    </div>
+
+    <!-- Termékek kártyarács -->
+    <div class="services-grid">
+      {siteConfig.servicesSection.items.map((item) => (
+        <div class="service-card">
+          {item.badge && <span class="service-card__badge">{item.badge}</span>}
+          <div>
+            <div class="service-card__icon">{item.icon}</div>
+            <h3 class="service-card__title">{item.title}</h3>
+            <p class="service-card__desc">{item.description}</p>
+          </div>
+          <div class="service-card__footer">
+            <span class="service-card__price">{item.price || 'Friss napi vágásból'}</span>
+            <a href="#kapcsolat" class="btn btn--outline" style="padding:0.4rem 0.9rem; font-size:0.85rem;">
+              Érdeklődés →
+            </a>
+          </div>
+        </div>
+      ))}
+    </div>
+
+    <!-- Hivatalos dokumentumok & Képes Terméklista sáv -->
+    <div class="docs-download-box">
+      <div class="docs-download-box__left">
+        <span style="font-size:2rem;">📄</span>
+        <div>
+          <h4 style="margin:0 0 0.25rem 0; font-size:1.1rem; color:var(--color-text);">
+            Hivatalos Tájékoztatók & Allergén Táblázat
+          </h4>
+          <p style="margin:0; font-size:0.9rem; color:var(--color-text-soft);">
+            A Jáner-Hús Zrt. által forgalmazott termékek részletes összetevő- és allergén kimutatása PDF formátumban.
+          </p>
+        </div>
+      </div>
+      <div class="docs-download-box__right">
+        <a
+          href={siteConfig.servicesSection.allergenPdfUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="btn btn--outline"
+          style="display:inline-flex; align-items:center; gap:0.5rem;"
+        >
+          📥 Allergén Táblázat (PDF)
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .docs-download-box {
+    margin-top: 3rem;
+    background: var(--color-white);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    padding: 1.5rem 2rem;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.5rem;
+    box-shadow: var(--shadow-sm);
+  }
+
+  .docs-download-box__left {
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+  }
+</style>

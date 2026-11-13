@@ -1,0 +1,23 @@
+---
+import { siteConfig } from '../config/site';
+---
+
+<section id="miert-mi" class="section" aria-labelledby="why-us-title">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-badge">Hagyomány és Bizalom</span>
+      <h2 id="why-us-title">{siteConfig.whyUs.title}</h2>
+      <p>{siteConfig.whyUs.subtitle}</p>
+    </div>
+
+    <div class="why-us-grid">
+      {siteConfig.whyUs.items.map((item) => (
+        <div class="why-us-card">
+          <div class="why-us-card__icon">{item.icon}</div>
+          <h3 style="margin-bottom:0.75rem; color:var(--color-text);">{item.title}</h3>
+          <p style="font-size:0.95rem; line-height:1.6; color:var(--color-text-soft);">{item.description}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

@@ -1,0 +1,69 @@
+---
+import { siteConfig } from '../config/site';
+---
+
+<section id="velemenyek" class="section section--alt" aria-labelledby="reviews-title">
+  <div class="container">
+    <div class="section-header">
+      {siteConfig.reviewsSection.badge && (
+        <span class="section-badge">{siteConfig.reviewsSection.badge}</span>
+      )}
+      <h2 id="reviews-title">{siteConfig.reviewsSection.title}</h2>
+      <p style="font-size:1.15rem; margin-top:0.5rem;">
+        Hivatalos Google Értékelés: <strong style="color:var(--color-primary);">⭐ {siteConfig.reviewsSection.googleScore} / 5.0</strong> ({siteConfig.reviewsSection.googleCount} valós vásárlói vélemény alapján)
+      </p>
+    </div>
+
+    <div class="reviews-grid">
+      {siteConfig.reviewsSection.items.map((rev) => (
+        <div class="review-card">
+          <div class="review-card__stars">{'★'.repeat(rev.rating)}</div>
+          <p class="review-card__text">„{rev.comment}”</p>
+          <div>
+            <div class="review-card__author">{rev.author}</div>
+            {rev.role && <div class="review-card__role">{rev.role}</div>}
+          </div>
+        </div>
+      ))}
+    </div>
+
+    <!-- Google Maps tanúsítvány doboz -->
+    <div class="google-trust-banner">
+      <div style="font-size:2.2rem;">📍</div>
+      <div>
+        <h4 style="margin:0 0 0.25rem 0; font-size:1.05rem;">
+          Jáner-Hús Zrt. 1. számú Mintabolt (Óbuda)
+        </h4>
+        <p style="margin:0; font-size:0.9rem; color:var(--color-text-soft);">
+          1036 Budapest, Pacsirtamező utca 22. · A környékbeliek kedvenc hentese és grillbárja évtizedek óta.
+        </p>
+      </div>
+      <div style="margin-left:auto;">
+        <a
+          href="https://maps.google.com/?q=Jáner-Hús+Zrt.+Pacsirtamező+utca+22"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="btn btn--outline"
+          style="padding:0.5rem 1rem; font-size:0.85rem;"
+        >
+          Google Maps Megnyitása ↗
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .google-trust-banner {
+    margin-top: 2.5rem;
+    background: var(--color-white);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    padding: 1.25rem 1.75rem;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 1.25rem;
+    box-shadow: var(--shadow-sm);
+  }
+</style>

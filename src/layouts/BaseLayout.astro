@@ -1,0 +1,97 @@
+---
+import '../styles/global.css';
+import { siteConfig } from '../config/site';
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const {
+  title = `${siteConfig.businessName} – ${siteConfig.tagline}`,
+  description = siteConfig.seoDescription,
+} = Astro.props;
+
+const canonicalUrl = new URL(Astro.url.pathname, siteConfig.siteUrl).href;
+
+// Schema.org LocalBusiness strukturált adat a Google SEO-hoz
+const schemaData = {
+  "@context": "https://schema.org",
+  "@type": "LocalBusiness",
+  "name": siteConfig.businessName,
+  "description": siteConfig.seoDescription,
+  "url": siteConfig.siteUrl,
+  "telephone": siteConfig.contact.phoneClean,
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": siteConfig.contact.address,
+    "addressCountry": "HU"
+  },
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": siteConfig.reviewsSection.googleScore,
+    "reviewCount": siteConfig.reviewsSection.googleCount.replace('+', '')
+  }
+};
+---
+
+<!doctype html>
+<html lang="hu">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonicalUrl} />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:site_name" content={siteConfig.businessName} />
+    <meta property="og:locale" content="hu_HU" />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>" />
+    <meta name="theme-color" content={siteConfig.theme.primary} />
+
+    <!-- Google Fonts Preconnect -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+    <!-- Schema.org JSON-LD -->
+    <script type="application/ld+json" set:html={JSON.stringify(schemaData)} />
+
+    <!-- Dinamikus CSS változók a site.ts-ből -->
+    <style define:vars={{
+      primary: siteConfig.theme.primary,
+      primaryHover: siteConfig.theme.primaryHover,
+      accent: siteConfig.theme.accent,
+      bg: siteConfig.theme.bg,
+      bgAlt: siteConfig.theme.bgAlt,
+      text: siteConfig.theme.text,
+      textSoft: siteConfig.theme.textSoft,
+      border: siteConfig.theme.border,
+    }}>
+      :root {
+        --color-primary: var(--primary);
+        --color-primary-hover: var(--primaryHover);
+        --color-accent: var(--accent);
+        --color-bg: var(--bg);
+        --color-bg-alt: var(--bgAlt);
+        --color-text: var(--text);
+        --color-text-soft: var(--textSoft);
+        --color-border: var(--border);
+      }
+    </style>
+  </head>
+  <body>
+    <slot name="header" />
+    <main id="main-content">
+      <slot />
+    </main>
+    <slot name="footer" />
+  </body>
+</html>
+

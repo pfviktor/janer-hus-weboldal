@@ -1,0 +1,75 @@
+---
+import { siteConfig } from '../config/site';
+
+const currentYear = new Date().getFullYear();
+---
+
+<footer class="footer" role="contentinfo">
+  <div class="container">
+    <div class="footer__grid">
+      <!-- Céginfó & Hivatalos adatok -->
+      <div>
+        <div class="footer__brand-name">🥩 {siteConfig.businessName}</div>
+        <p class="footer__brand-text">{siteConfig.tagline}</p>
+
+        <div style="margin-top:1.25rem; font-size:0.85rem; color:rgba(255,255,255,0.75); line-height:1.7;">
+          <p style="margin-bottom:0.4rem;"><strong>{siteConfig.legalName}</strong></p>
+          <p style="margin:0;">Cégjegyzékszám: {siteConfig.companyData.registrationNumber}</p>
+          <p style="margin:0;">Adószám: {siteConfig.companyData.taxNumber}</p>
+          <p style="margin:0;">EU Üzemek: {siteConfig.companyData.euPlantBudapest} · {siteConfig.companyData.euPlantSzigetszentmiklos}</p>
+          <p style="margin:0;">Minőségirányítás: {siteConfig.companyData.iso}</p>
+        </div>
+      </div>
+
+      <!-- Gyors linkek -->
+      <div>
+        <h4 class="footer__heading">Navigáció</h4>
+        <ul class="footer__links">
+          <li><a href="#mintaboltok">Mintaboltjaink & Grillpult</a></li>
+          <li><a href="#termekek">Termékeink & TRADÍCIÓ</a></li>
+          <li><a href="#nagykereskedes">B2B Húsnagykereskedés</a></li>
+          <li><a href="#elokeszites">Konyhakész Húsbontás</a></li>
+          <li><a href="#miert-mi">Miért a Jáner-Hús?</a></li>
+          <li><a href="#velemenyek">Google Értékelések (4.8★)</a></li>
+          <li><a href="#kapcsolat">Kapcsolat & Rendelés</a></li>
+        </ul>
+      </div>
+
+      <!-- Központi elérhetőségek & Letöltések -->
+      <div>
+        <h4 class="footer__heading">Központ & Kapcsolat</h4>
+        <div style="font-size:0.88rem; color:rgba(255,255,255,0.8); line-height:1.8;">
+          <p style="margin-bottom:0.5rem;">
+            📍 1036 Budapest, Pacsirtamező utca 22.<br />
+            📞 Ügyfélszolgálat: <a href={`tel:${siteConfig.contact.phoneClean}`} style="color:var(--color-accent); font-weight:700;">{siteConfig.contact.phone}</a><br />
+            📞 Rendelés: <a href={`tel:${siteConfig.contact.phoneSecondaryClean}`} style="color:rgba(255,255,255,0.95);">{siteConfig.contact.phoneSecondary}</a><br />
+            ✉️ <a href={`mailto:${siteConfig.contact.email}`} style="color:rgba(255,255,255,0.95);">{siteConfig.contact.email}</a>
+          </p>
+          <p style="margin-top:1rem;">
+            <a
+              href={siteConfig.servicesSection.allergenPdfUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              style="color:var(--color-accent); text-decoration:underline; font-size:0.85rem;"
+            >
+              📄 Hivatalos Allergén Táblázat (PDF)
+            </a>
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Lábléc alja & Készítői jelölés -->
+    <div class="footer__bottom">
+      <div>
+        © {currentYear} {siteConfig.businessName} – Minden jog fenntartva.
+      </div>
+
+      {siteConfig.agencyCredit.enabled && (
+        <div>
+          Készítette: <a href={siteConfig.agencyCredit.url} target="_blank" rel="noopener noreferrer" style="color:var(--color-accent); font-weight:600;">{siteConfig.agencyCredit.name}</a>
+        </div>
+      )}
+    </div>
+  </div>
+</footer>

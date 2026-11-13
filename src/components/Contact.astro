@@ -1,0 +1,167 @@
+---
+import { siteConfig } from '../config/site';
+---
+
+<section id="kapcsolat" class="section" aria-labelledby="contact-title">
+  <div class="container">
+    <div class="section-header">
+      {siteConfig.contact.badge && (
+        <span class="section-badge">{siteConfig.contact.badge}</span>
+      )}
+      <h2 id="contact-title">{siteConfig.contact.title}</h2>
+      <p>{siteConfig.contact.subtitle}</p>
+    </div>
+
+    <div class="contact-grid">
+      <!-- Bal oldal: Elérhetőségek & Címek -->
+      <div>
+        <div class="contact-card">
+          <h3 style="margin-bottom:1rem; color:var(--color-text);">Központi Elérhetőségek</h3>
+          <p style="font-size:0.95rem; margin-bottom:1.5rem;">
+            Kérdéseivel, rendeléseivel és B2B nagykereskedelmi partnerséggel kapcsolatban forduljon hozzánk bizalommal!
+          </p>
+
+          <div class="contact-info-list">
+            <!-- Telefonok -->
+            <div class="contact-info-item">
+              <span class="contact-info-icon">📞</span>
+              <div>
+                <div class="contact-info-label">Rendelésfelvétel & Ügyfélszolgálat</div>
+                <div class="contact-info-val">
+                  <a href={`tel:${siteConfig.contact.phoneClean}`} style="color:var(--color-primary); font-weight:700;">
+                    {siteConfig.contact.phone}
+                  </a>
+                  <span style="color:var(--color-border); margin:0 0.4rem;">|</span>
+                  <a href={`tel:${siteConfig.contact.phoneSecondaryClean}`} style="color:var(--color-primary);">
+                    {siteConfig.contact.phoneSecondary}
+                  </a>
+                </div>
+                <div style="font-size:0.85rem; color:var(--color-text-soft); margin-top:0.2rem;">
+                  Mobil: <a href={`tel:${siteConfig.contact.phoneMobileClean}`}>{siteConfig.contact.phoneMobile}</a>
+                </div>
+              </div>
+            </div>
+
+            <!-- Emailek -->
+            <div class="contact-info-item">
+              <span class="contact-info-icon">✉️</span>
+              <div>
+                <div class="contact-info-label">E-mail címeink</div>
+                <div class="contact-info-val">
+                  <a href={`mailto:${siteConfig.contact.email}`} style="color:var(--color-primary); font-weight:700;">
+                    {siteConfig.contact.email}
+                  </a>
+                  <div style="font-size:0.85rem; color:var(--color-text-soft); margin-top:0.15rem;">
+                    {siteConfig.contact.emailSupport}
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Üzemek & Központ -->
+            <div class="contact-info-item">
+              <span class="contact-info-icon">🏢</span>
+              <div>
+                <div class="contact-info-label">Központ & 1. sz. Mintabolt</div>
+                <div class="contact-info-val">1036 Budapest, Pacsirtamező utca 22.</div>
+                <div style="font-size:0.85rem; color:var(--color-text-soft);">Bolt tel: (06 1) 367 5630</div>
+              </div>
+            </div>
+
+            <div class="contact-info-item">
+              <span class="contact-info-icon">🏭</span>
+              <div>
+                <div class="contact-info-label">Húsbontó & Húsnagykereskedés (HU 387 EK)</div>
+                <div class="contact-info-val">1138 Budapest, Dugonics utca 15.</div>
+              </div>
+            </div>
+
+            <div class="contact-info-item">
+              <span class="contact-info-icon">🏭</span>
+              <div>
+                <div class="contact-info-label">Húsfeldolgozó Üzem (HU 495 EK)</div>
+                <div class="contact-info-val">2310 Szigetszentmiklós, Lehel út 9.</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Nyitvatartási összefoglaló -->
+          <div style="border-top:1px solid var(--color-border); padding-top:1.25rem; margin-top:1.5rem;">
+            <h4 style="font-size:0.95rem; font-weight:700; margin-bottom:0.75rem;">Főbb nyitvatartási rendek:</h4>
+            <ul style="font-size:0.88rem; line-height:1.7;">
+              {siteConfig.contact.hours.map((h) => (
+                <li style="display:flex; flex-direction:column; border-bottom:1px dashed var(--color-border); padding:0.35rem 0;">
+                  <span style="font-weight:600; color:var(--color-text);">{h.days}</span>
+                  <span style="color:var(--color-primary); font-weight:700;">{h.time}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Jobb oldal: FormSubmit űrlap -->
+      <div>
+        <div class="contact-card">
+          <h3 style="margin-bottom:0.5rem; color:var(--color-text);">Online Üzenetküldés & Árajánlatkérés</h3>
+          <p style="font-size:0.95rem; margin-bottom:1.5rem;">
+            Töltse ki az űrlapot éttermi/B2B árajánlatkéréshez vagy lakossági előrendeléshez, munkatársunk hamarosan visszahívja.
+          </p>
+
+          <form
+            id="contact-form"
+            action={`https://formsubmit.co/${siteConfig.contact.formSubmitEmail}`}
+            method="POST"
+          >
+            <!-- FormSubmit beállítások -->
+            <input type="hidden" name="_subject" value={`Új weboldalas megkeresés – ${siteConfig.businessName}`} />
+            <input type="hidden" name="_template" value="table" />
+            <input type="hidden" name="_captcha" value="false" />
+            <input type="hidden" name="_next" value={`${siteConfig.siteUrl}/koszonom`} />
+
+            <!-- Honeypot spamcsapda -->
+            <input type="text" name="_honey" style="display:none;" />
+
+            <div class="form-group">
+              <label for="name">Az Ön neve / Cég neve *</label>
+              <input type="text" id="name" name="Név" placeholder="Pl. Kovács Péter (vagy Cég/Étterem neve)" required autocomplete="name" />
+            </div>
+
+            <div class="form-group">
+              <label for="phone">Telefonszáma *</label>
+              <input type="tel" id="phone" name="Telefonszám" placeholder="Pl. +36 30 123 4567" required autocomplete="tel" />
+            </div>
+
+            <div class="form-group">
+              <label for="email">E-mail címe *</label>
+              <input type="email" id="email" name="Email" placeholder="peter@pelda.hu" required autocomplete="email" />
+            </div>
+
+            <div class="form-group">
+              <label for="service">Megkeresés típusa *</label>
+              <select id="service" name="Típus" required>
+                <option value="">Kérjük válasszon...</option>
+                <option value="B2B Nagykereskedelmi árajánlat (HORECA / Étterem)">B2B Nagykereskedelmi árajánlat (HORECA / Étterem)</option>
+                <option value="Konyhakész egyedi húsbontás séfeknek">Konyhakész egyedi húsbontás séfeknek</option>
+                <option value="Lakossági előrendelés – 1. sz. Óbuda (Pacsirtamező u.)">Lakossági előrendelés – 1. sz. Óbuda (Pacsirtamező u.)</option>
+                <option value="Lakossági érdeklődés – 2. sz. Isaszeg">Lakossági érdeklődés – 2. sz. Isaszeg</option>
+                <option value="Lakossági érdeklődés – 3. sz. Monor (Tesco)">Lakossági érdeklődés – 3. sz. Monor (Tesco)</option>
+                <option value="Lakossági érdeklődés – 4. sz. Dunakeszi (Tesco)">Lakossági érdeklődés – 4. sz. Dunakeszi (Tesco)</option>
+                <option value="Egyéb üzleti / állásajánlat / észrevétel">Egyéb üzleti / észrevétel</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="message">Üzenet vagy tételes rendelési igény</label>
+              <textarea id="message" name="Üzenet" placeholder="Írja le a kívánt mennyiséget, termékeket, vagy a kiszállítás/átvétel tervezett időpontját..."></textarea>
+            </div>
+
+            <button type="submit" class="btn btn--primary" style="width:100%; font-size:1rem; padding:0.85rem 1.5rem;">
+              Üzenet és Igény Elküldése →
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
