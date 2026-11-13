@@ -1,0 +1,19 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Farkas Web Studio//Janer Hus Followup//HU
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+SUMMARY:Jáner-Hús follow-up email küldése (Molnár János)
+DESCRIPTION:Ha eddig nem érkezett válasz a Jáner-Hús Zrt.-től a pénteki megkeresésre\, küldd el a rövid follow-upot!\n\nCímzett: rendeles@janerhus.hu\nTárgy: Re: Jáner-Hús weboldal minta\n\nSzöveg:\nTisztelt Molnár Úr!\n\nCsak egy rövid üzenet erejéig érdeklődöm\, hogy sikerült-e rápillantani a múltkor küldött weboldal-tervre a telefonján:\n👉 https://janer-hus-weboldal.vercel.app\n\nKíváncsi lennék a véleményére\, elnyerte-e a tetszését az elrendezés és az új arculat. Ha van bármilyen részlet\, amit másképp látna jónak\, szívesen igazítok rajta.\n\nSzép napot és jó munkát kívánok a hétre!\n\nTisztelettel\,\nFarkas Viktor\nAlapító · Farkas Web Studio
+DTSTART:20261117T074500Z
+DTEND:20261117T080000Z
+STATUS:CONFIRMED
+BEGIN:VALARM
+TRIGGER:-PT15M
+ACTION:DISPLAY
+DESCRIPTION:Jáner-Hús emlékeztető email küldése!
+END:VALARM
+END:VEVENT
+END:VCALENDAR
+

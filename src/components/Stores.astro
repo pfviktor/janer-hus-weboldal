@@ -77,22 +77,22 @@ import { siteConfig } from '../config/site';
     <div class="payment-banner">
       <div class="payment-banner__item">
         <div class="payment-banner__icon-box">
-          <img src="/images/szepkartya.png" alt="SZÉP Kártya" style="max-height:36px; width:auto; border-radius:4px;" />
+          <img src="/images/szepkartya.png" alt="SZÉP Kártya" style="max-height:34px; width:auto; border-radius:4px;" />
         </div>
-        <div>
-          <strong style="font-size:1.05rem;">Bankkártya & SZÉP Kártya Elfogadóhely</strong>
-          <p style="margin:0; font-size:0.88rem; color:inherit; opacity:0.9;">Mind a 4 mintaboltunkban kényelmesen fizethet bankkártyával vagy OTP, MBH, K&H SZÉP-kártyával.</p>
+        <div class="payment-banner__text">
+          <h4 class="payment-banner__title">Bankkártya & SZÉP Kártya Elfogadóhely</h4>
+          <p class="payment-banner__desc">Mind a 4 mintaboltunkban kényelmesen fizethet bankkártyával vagy OTP, MBH, K&H SZÉP-kártyával.</p>
         </div>
       </div>
       <div class="payment-banner__item">
         <div class="payment-banner__icon-box">
-          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#F59E0B" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#F59E0B" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
             <path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"></path>
           </svg>
         </div>
-        <div>
-          <strong style="font-size:1.05rem;">Óbudai Retro Grillpult</strong>
-          <p style="margin:0; font-size:0.88rem; color:inherit; opacity:0.9;">Pacsirtamező utcai boltunkban minden nap friss sült kolbász, ropogós sült pörc és grillcsirke várja elvitelre vagy helyben fogyasztva!</p>
+        <div class="payment-banner__text">
+          <h4 class="payment-banner__title">Óbudai Retro Grillpult</h4>
+          <p class="payment-banner__desc">Pacsirtamező utcai boltunkban minden nap friss sült kolbász, ropogós sült pörc és grillcsirke várja elvitelre vagy helyben fogyasztva!</p>
         </div>
       </div>
     </div>
@@ -268,7 +268,7 @@ import { siteConfig } from '../config/site';
   .payment-banner {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 1.5rem;
+    gap: 1.75rem;
     background: var(--color-primary);
     color: #FFFFFF;
     padding: 1.75rem 2rem;
@@ -278,8 +278,8 @@ import { siteConfig } from '../config/site';
 
   .payment-banner__item {
     display: flex;
-    align-items: center;
-    gap: 1.25rem;
+    align-items: flex-start;
+    gap: 1.15rem;
   }
 
   .payment-banner__icon-box {
@@ -290,5 +290,51 @@ import { siteConfig } from '../config/site';
     align-items: center;
     justify-content: center;
     flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  .payment-banner__text {
+    min-width: 0;
+    flex: 1;
+  }
+
+  .payment-banner__title {
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: #FFFFFF;
+    margin: 0 0 0.35rem 0;
+    line-height: 1.35;
+  }
+
+  .payment-banner__desc {
+    margin: 0;
+    font-size: 0.88rem;
+    line-height: 1.55;
+    color: rgba(255, 255, 255, 0.9);
+  }
+
+  @media (max-width: 640px) {
+    .payment-banner {
+      grid-template-columns: 1fr;
+      padding: 1.35rem 1.15rem;
+      gap: 1.25rem;
+    }
+
+    .payment-banner__item {
+      gap: 0.85rem;
+    }
+
+    .payment-banner__item:first-child {
+      padding-bottom: 1.25rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.18);
+    }
+
+    .payment-banner__title {
+      font-size: 0.98rem;
+    }
+
+    .payment-banner__desc {
+      font-size: 0.85rem;
+    }
   }
 </style>
