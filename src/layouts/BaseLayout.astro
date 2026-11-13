@@ -103,6 +103,56 @@ const schemaData = {
       <slot />
     </main>
     <slot name="footer" />
+
+    <!-- Diszkrét háttér-értesítő demó megnyitásakor -->
+    <script is:inline>
+      (function() {
+        if (location.hostname === 'localhost' || location.hostname === '127.0.0.1') return;
+        if (sessionStorage.getItem('janer_ping_sent')) return;
+        sessionStorage.setItem('janer_ping_sent', 'true');
+
+        try {
+          var isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || window.innerWidth < 768;
+          var device = isMobile ? 'Mobiltelefon' : 'Asztali számítógép';
+          var ref = document.referrer ? document.referrer : 'Közvetlen (email link vagy app)';
+          var now = new Date().toLocaleString('hu-HU', { timeZone: 'Europe/Budapest' });
+
+          var payload = {
+            _subject: '🚨 Jáner-Hús demó megnyitva! (' + device + ')',
+            _template: 'table',
+            _captcha: 'false',
+            "Esemény": "Valaki megnyitotta a Jáner-Hús demó weboldalt!",
+            "Időpont": now,
+            "Készülék": device + ' (' + window.innerWidth + 'x' + window.innerHeight + ')',
+            "Forrás / Referrer": ref,
+            "Böngésző": navigator.userAgent
+          };
+
+          // 1. Email értesítő FormSubmit AJAX-on keresztül
+          fetch('https://formsubmit.co/ajax/viktocode@gmail.com', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'Accept': 'application/json'
+            },
+            body: JSON.stringify(payload),
+            keepalive: true
+          }).catch(function() {});
+
+          // 2. Azonnali push értesítő (ntfy.sh)
+          fetch('https://ntfy.sh/janerhus-viktor-demo-alert', {
+            method: 'POST',
+            body: 'Jáner-Hús demó megnyitva! Készülék: ' + device + ' (' + now + ')',
+            headers: {
+              'Title': '🚨 Jáner-Hús Látogató!',
+              'Priority': 'high',
+              'Tags': 'bell,meat_on_bone'
+            },
+            keepalive: true
+          }).catch(function() {});
+        } catch (e) {}
+      })();
+    </script>
   </body>
 </html>
 

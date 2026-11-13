@@ -2,3 +2,4 @@ User-agent: *
 Allow: /
 
 Sitemap: https://janer-hus-weboldal.vercel.app/sitemap-index.xml
+
