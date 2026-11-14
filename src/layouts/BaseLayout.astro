@@ -108,6 +108,19 @@ const schemaData = {
     <script is:inline>
       (function() {
         if (location.hostname === 'localhost' || location.hostname === '127.0.0.1') return;
+
+        // 1. Saját készülék kiszűrése (ha ?admin=true paraméterrel nyitod meg, elmenti a gépre és soha többé nem küld riasztást a te eszközödről)
+        try {
+          var search = window.location.search || '';
+          if (search.indexOf('admin=true') !== -1 || search.indexOf('dev=true') !== -1 || search.indexOf('ignore=1') !== -1) {
+            localStorage.setItem('farkas_admin_device', 'true');
+            return;
+          }
+          if (localStorage.getItem('farkas_admin_device') === 'true') {
+            return;
+          }
+        } catch (e) {}
+
         if (sessionStorage.getItem('janer_ping_sent')) return;
         sessionStorage.setItem('janer_ping_sent', 'true');
 
@@ -129,7 +142,7 @@ const schemaData = {
           };
 
           // 1. Email értesítő FormSubmit AJAX-on keresztül
-          fetch('https://formsubmit.co/ajax/viktocode@gmail.com', {
+          fetch('https://formsubmit.co/ajax/farkaswebdev@gmail.com', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
@@ -139,12 +152,13 @@ const schemaData = {
             keepalive: true
           }).catch(function() {});
 
-          // 2. Azonnali push értesítő (ntfy.sh)
-          fetch('https://ntfy.sh/janerhus-viktor-demo-alert', {
+          // 2. Azonnali push értesítő (ntfy.sh - fejlécben csak tiszta ASCII lehet!)
+          var asciiTitle = 'Demo megnyitva: ' + (clientName || 'Janer-Hus').normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[^\x20-\x7E]/g, '');
+          fetch('https://ntfy.sh/farkas-webstudio-demo-alerts', {
             method: 'POST',
             body: 'Jáner-Hús demó megnyitva! Készülék: ' + device + ' (' + now + ')',
             headers: {
-              'Title': '🚨 Jáner-Hús Látogató!',
+              'Title': asciiTitle,
               'Priority': 'high',
               'Tags': 'bell,meat_on_bone'
             },
