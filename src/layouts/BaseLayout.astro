@@ -153,7 +153,7 @@ const schemaData = {
           }).catch(function() {});
 
           // 2. Azonnali push értesítő (ntfy.sh - fejlécben csak tiszta ASCII lehet!)
-          var asciiTitle = 'Demo megnyitva: ' + (clientName || 'Janer-Hus').normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[^\x20-\x7E]/g, '');
+          var asciiTitle = 'Demo megnyitva: Janer-Hus'; // FIX 2026-11-14: clientName nem volt definiálva -> ReferenceError -> push soha nem ment ki
           fetch('https://ntfy.sh/farkas-webstudio-demo-alerts', {
             method: 'POST',
             body: 'Jáner-Hús demó megnyitva! Készülék: ' + device + ' (' + now + ')',
